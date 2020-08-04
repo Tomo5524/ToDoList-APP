@@ -1,0 +1,24 @@
+{
+  "name": "todolist-app",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tomo5524/ToDoList-APP.git"
+  },
+  "author": "Tomoaki Takebuchi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tomo5524/ToDoList-APP/issues"
+  },
+  "homepage": "https://github.com/Tomo5524/ToDoList-APP#readme",
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
