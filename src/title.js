@@ -1,47 +1,58 @@
 
 const renderTitle = () => {
-    const container = document.createElement('div');
-    container.setAttribute('class', 'title-container fluid-container d-flex');
+    // const container = document.createElement('div');
+    // container.setAttribute('class', 'main-container fluid-container d-flex');
 
-    const title__menu_container = document.createElement('div');
-    // container-fluid for a full width container,
-    title__menu_container.setAttribute('class', 'col-4');
+    // const title__menu_container = document.createElement('div');
+    // // container-fluid for a full width container,
+    // title__menu_container.setAttribute('class', 'menu-cotainer col-4 border-r');
 
-    const title_box = document.createElement('div');
-    title_box.setAttribute('class', 'title_box d-flex');
+    // const nav = document.createElement('div');
+    // nav.setAttribute('class', 'nav d-flex justify-content-between align-items-center');
 
-    const menu = document.createElement('button')
-    menu.setAttribute('class', 'btn menu-btn');
+    // const title_div = document.createElement('div');
+    // title_div.setAttribute('class', 'title-div');
 
-    const menu_btn = document.createElement('i')
-    menu_btn.setAttribute('class', 'fas fa-bars');
+    // const title = document.createElement('h1');
+    // title.setAttribute('class', 'logo');
+    // title.innerHTML = 'TodoList'
 
-    menu.appendChild(menu_btn)
+    // title_div.appendChild(title)
 
-    const add = document.createElement('button')
-    add.setAttribute('class', 'btn add-btn');
 
-    const add_btn = document.createElement('i')
-    add_btn.setAttribute('class', "fas fa-plus");
+    // const menu_add = document.createElement('div');
+    // menu_add.setAttribute('class', 'menu-add-div');
 
-    add.appendChild(add_btn)
+    // const menu = document.createElement('button')
+    // menu.setAttribute('class', 'btn menu-btn');
 
-    const title = document.createElement('h1');
-    title.setAttribute('class', 'logo');
-    title.innerHTML = 'TodoList'
+    // const menu_btn = document.createElement('i');
+    // menu_btn.setAttribute('class', 'fas fa-bars');
 
-    title_box.appendChild(menu)
-    title_box.appendChild(add)
-    title_box.appendChild(title)
+    // menu.appendChild(menu_btn)
 
-    title__menu_container.appendChild(title_box)
+    // const add = document.createElement('button')
+    // add.setAttribute('class', 'btn add-btn');
+
+    // const add_btn = document.createElement('i')
+    // add_btn.setAttribute('class', "fas fa-plus");
+
+    // add.appendChild(add_btn)
+
+    // menu_add.appendChild(menu)
+    // menu_add.appendChild(add)
+
+    // nav.appendChild(title_div)
+    // nav.appendChild(menu_add)
+
+    // title__menu_container.appendChild(nav)
 
     const tasks_container = document.createElement('div');
     // container-fluid for a full width container,
-    tasks_container.setAttribute('class', 'col-8');
+    tasks_container.setAttribute('class', ' task-container col-8');
 
     const date_title_box = document.createElement('div');
-    date_title_box.setAttribute('class', 'date-title d-flex align-items-center');
+    date_title_box.setAttribute('class', 'd-flex align-items-center');
 
     const folder_title = document.createElement('h3')
     folder_title.setAttribute('class', 'task-title');
@@ -74,10 +85,10 @@ const renderTitle = () => {
 
     tasks_container.appendChild(date_title_box)
 
-    container.appendChild(title__menu_container)
-    container.appendChild(tasks_container)
+    // container.appendChild(title__menu_container)
+    // container.appendChild(tasks_container)
 
-    return container
+    return tasks_container
 }
 
 export default renderTitle
