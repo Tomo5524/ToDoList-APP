@@ -7,13 +7,27 @@
     padding: 0;
 }
 
-.b{
-    border: 2px solid #333333;
+html,body{
+    height: 100%;
 }
 
-.date-title{
-    padding-top: 4rem;
+.border{
+    border: 1px solid #333333;
 }
+
+/* utility */
+.display{
+    display: block;
+}
+
+.no-display{
+    display: none;
+}
+
+/* header */
+/* .date-title{
+    padding-top: 4rem;
+} */
 
 /* modal */
 .overlay {
@@ -23,17 +37,21 @@
     width: 100vw; /* 100vw means 100% of the viewport width*/  
     height: 100vh; /* 100vh; 100% of the height */
     background-color: rgba(128,128,128,0.5); /* color */
-    display: none; /* making it hidden by default */
+    /* display: none; making it hidden by default */
 }
 
-.modal {
+.modal-box {
     position: fixed; /* positioning in center of page */
     top: 50vh;
     left: 50vw;
     transform: translate(-50%,-50%);
-    height: 400px; /* size */
-    width: 600px;
+    /* height: 400px; 
+    width: 600px; */
     background-color: white; /* background color */
+}
+
+.border-r{
+    border-right: 1px solid #333;
 }
 
 /* responsive text */
