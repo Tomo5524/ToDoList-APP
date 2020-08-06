@@ -34,8 +34,7 @@ const menu_btn = document.querySelector('.menu-btn');
 const form = renderForm()
 console.log(form)
 
-const folder = displayFolder()
-console.log(folder)
+
 
 //How to disable background when modal window pops up
 // https://stackoverflow.com/questions/45607982/how-to-disable-background-when-modal-window-pops-up
@@ -51,7 +50,10 @@ add_btn.addEventListener('click', e => {
 })
 
 menu_btn.addEventListener('click', e => {
+    const folder = displayFolder()
+    // console.log(folder)
     console.log(e.target)
-    console.log('hiya')
+    console.log('open folder')
+    // folder.display = 'block'
     content.appendChild(folder)
 })
