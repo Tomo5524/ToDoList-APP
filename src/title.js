@@ -1,3 +1,5 @@
+import Task from "./task.js"
+
 
 const renderTitle = () => {
     // const container = document.createElement('div');
@@ -87,6 +89,16 @@ const renderTitle = () => {
 
     // container.appendChild(title__menu_container)
     // container.appendChild(tasks_container)
+
+    edit.addEventListener('click', e => {
+        console.log('edit hit')
+        const a = Task()
+        console.log(a)
+        console.log(a.show_project())
+
+        // Task.show_task()
+        
+    })
 
     return tasks_container
 }

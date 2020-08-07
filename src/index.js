@@ -30,16 +30,18 @@ console.log(nav)
 
 const add_btn = document.querySelector('.add-btn');
 const menu_btn = document.querySelector('.menu-btn');
+const cancel_btn = document.querySelector('cancel_box');
 
-const form = renderForm()
-console.log(form)
+
 
 
 
 //How to disable background when modal window pops up
 // https://stackoverflow.com/questions/45607982/how-to-disable-background-when-modal-window-pops-up
 add_btn.addEventListener('click', e => {
-    console.log(e.target)
+    const form = renderForm()
+// console.log(form)
+    // console.log(e.target)
     content.appendChild(form)
 
     // totally works
@@ -50,6 +52,8 @@ add_btn.addEventListener('click', e => {
 })
 
 menu_btn.addEventListener('click', e => {
+
+    // calling displayFoloer makes it possible to close window
     const folder = displayFolder()
     // console.log(folder)
     console.log(e.target)
@@ -57,3 +61,14 @@ menu_btn.addEventListener('click', e => {
     // folder.display = 'block'
     content.appendChild(folder)
 })
+
+// cancel_btn.addEventListener('click', e => {
+
+//     // calling displayFoloer makes it possible to close window
+//     const folder = displayFolder()
+//     // console.log(folder)
+//     console.log(e.target)
+//     console.log('open folder')
+//     // folder.display = 'block'
+//     content.appendChild(folder)
+// })

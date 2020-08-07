@@ -1,8 +1,14 @@
+import Task from "./task.js"
+import closeItem from "./close.js"
 
 const renderForm = () => {
     const overlay = document.createElement('div');
     overlay.setAttribute('class', 'overlay');
-    overlay.display = 'block'
+    // overlay.display = 'block'
+
+    if (overlay.classList.contains('no-display')){
+        overlay.classList.remove('no-display')
+    }
 
     const modal = document.createElement('div');
     modal.setAttribute('class', 'modal-box col-12 col-sm-9 col-lg-6');
@@ -124,11 +130,11 @@ const renderForm = () => {
     const add_div = document.createElement('div');
     add_div.setAttribute('class', 'add-div pr-5');
 
-    const add_box = document.createElement('button');
-    add_box.setAttribute('class', 'add-box border');
-    add_box.innerHTML = 'Add'
+    const add_btn = document.createElement('button');
+    add_btn.setAttribute('class', 'add-box border');
+    add_btn.innerHTML = 'Add'
 
-    add_div.appendChild(add_box)
+    add_div.appendChild(add_btn)
 
     const cancel_div = document.createElement('div');
     cancel_div.setAttribute('class', 'cancel-div pl-5');
@@ -150,6 +156,34 @@ const renderForm = () => {
     modal.appendChild(add_cancel_div)
 
     overlay.appendChild(modal)
+
+    add_btn.addEventListener('click', e => {
+
+        console.log(e.target)
+        // console.log(title_box.value)
+        // console.log(dscr_box.value)
+        // console.log(note_box.value)
+        // console.log(date_box.value)
+        // console.log(start.value)
+        // console.log(end.value)
+        // console.log(priority.value)
+
+        // how can i read obj in title file
+
+        // Get the value of the input and remove whitespace
+        let l = Task(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
+        l.add_task()
+        console.log(l)
+        console.log(l.show_project())
+        
+    })
+
+    cancel_box.addEventListener('click', e => {
+        closeItem(overlay)
+               
+    })
+
+    
 
     // add cancel handler module
 
