@@ -1,19 +1,23 @@
 
-const Task = (title,desc,note,date,start,end,priority) => {
+const Task = () => {
 
     let todoItems_project = [];
     let todoItems_date = [];
 
-    const taskObj = {
-        title,
-        desc,
-        note,
-        date,
-        start,
-        end,
-        priority,
-        check : false,  
-        id : Date.now()
+    const getObj = (title,desc,note,date,start,end,priority) => {
+        let taskobj = {
+            title,
+            desc,
+            note,
+            date,
+            start,
+            end,
+            priority,
+            check : false,  
+            id : Date.now()
+        }
+
+        return taskobj
 
     }
     // When a todo is marked as completed, we’ll toggle the checked property to true, and when the user deletes a todo, we’ll locate the todo item in the array using its id
@@ -26,37 +30,33 @@ const Task = (title,desc,note,date,start,end,priority) => {
         }
     }
 
-    // const getObj = (title,desc,note,date,start,end,priority) => {
-        
-    // }
+    const add_task = (function(title,desc,note,date,start,end,priority)  {
+        const new_obj = {
+            title,
+            desc,
+            note,
+            date,
+            start,
+            end,
+            priority,
+            check : false,  
+            id : Date.now()
+        }
 
-    const add_task = () => {
-        // const new_obj = {
-        //     title,
-        //     desc,
-        //     note,
-        //     date,
-        //     start,
-        //     end,
-        //     priority,
-        //     check : false,  
-        //     id : Date.now()
-        // }
-        todoItems_project.push(taskObj)
-        todoItems_date.push(taskObj)
+        todoItems_project.push(new_obj)
+        todoItems_date.push(new_obj)
+    })();
+
+    const print_hiya = () => {
+        console.log('print hiya')
     }
-
-    // const add_task = (taskObj) => {
-    //     todoItems_project.push(taskObj)
-    //     todoItems_date.push(taskObj)
-    // }
 
     const show_project = () => todoItems_project
 
-    const show_task = () => taskObj
     // console.log('class created')
     // return {title,desc,note,date,start,end,priority}
-    return {todoItems_project, todoItems_date, getTask, add_task, show_project, show_task}
+    
+    return {todoItems_project, todoItems_date, getObj, getTask, getObj, add_task, print_hiya, show_project}
 }
 
 export default Task

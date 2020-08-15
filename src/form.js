@@ -1,7 +1,12 @@
 import Task from "./task.js"
 import closeItem from "./close.js"
+import render_Todo from "./renderTodo.js"
 
 const renderForm = () => {
+
+    const form = document.createElement('form');
+    form.setAttribute('class', 'form');
+
     const overlay = document.createElement('div');
     overlay.setAttribute('class', 'overlay');
     // overlay.display = 'block'
@@ -57,7 +62,7 @@ const renderForm = () => {
     const date_box = document.createElement('input');
     date_box.setAttribute('class', 'date-box border');
     date_box.setAttribute('type', 'date');
-    date_box.required = true
+    // date_box.required = true
 
     date_div.appendChild(date_text)
     date_div.appendChild(date_box)
@@ -103,24 +108,24 @@ const renderForm = () => {
 
     const priority_text = document.createElement('p');
     priority_text.setAttribute('class', 'form-text pr-3 priority-text');
-    priority_text.innerHTML = 'Priority: '
+    priority_text.innerHTML = 'Priority: '; 
 
     const priority = document.createElement('select');
     priority.setAttribute('class', 'priority-box border');
 
     const priority_val = document.createElement('option');
     priority_val.setAttribute('value', 'high');
-    priority_val.innerHTML = 'high'
+    priority_val.innerHTML = 'high'; 
 
-    priority.appendChild(priority_val)
+    priority.appendChild(priority_val); 
 
 
-    priority_div.appendChild(priority_text)
-    priority_div.appendChild(priority)
+    priority_div.appendChild(priority_text);
+    priority_div.appendChild(priority); 
 
-    start_end_prio_div.appendChild(start_div)
-    start_end_prio_div.appendChild(end_div)
-    start_end_prio_div.appendChild(priority_div)
+    start_end_prio_div.appendChild(start_div); 
+    start_end_prio_div.appendChild(end_div); 
+    start_end_prio_div.appendChild(priority_div); 
 
     ///// am and pm and priority
 
@@ -133,6 +138,7 @@ const renderForm = () => {
     const add_btn = document.createElement('button');
     add_btn.setAttribute('class', 'add-box border');
     add_btn.innerHTML = 'Add'
+    add_btn.type = 'submit'
 
     add_div.appendChild(add_btn)
 
@@ -156,25 +162,25 @@ const renderForm = () => {
     modal.appendChild(add_cancel_div)
 
     overlay.appendChild(modal)
+    form.appendChild(overlay)
 
-    add_btn.addEventListener('click', e => {
+    // submit
+    form.addEventListener('submit', e => {
 
-        console.log(e.target)
-        // console.log(title_box.value)
-        // console.log(dscr_box.value)
-        // console.log(note_box.value)
-        // console.log(date_box.value)
-        // console.log(start.value)
-        // console.log(end.value)
-        // console.log(priority.value)
+        console.log('submit')
+        // console.log(e.target)
+        e.preventDefault()
+        
 
         // how can i read obj in title file
 
         // Get the value of the input and remove whitespace
-        let l = Task(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
-        l.add_task()
-        console.log(l)
-        console.log(l.show_project())
+        let l = Task()
+        // l.add_task(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
+        // render_Todo(l.getObj())
+        let newObj = l.getObj(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
+        // render_Todo(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
+        render_Todo(newObj)
         
     })
 
@@ -183,11 +189,12 @@ const renderForm = () => {
                
     })
 
-    
+    add_div.addEventListener('click', e => {
+        closeItem(overlay)
+               
+    })
 
-    // add cancel handler module
-
-    return overlay
+    return form
 
 }
 

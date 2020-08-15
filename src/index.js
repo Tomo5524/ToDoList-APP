@@ -1,4 +1,4 @@
-import renderTitle from "./title.js"
+import todo_display from "./todoDisplay.js"
 import renderForm from "./form.js"
 import displayFolder from "./folders.js"
 import displayNav from "./nav.js"
@@ -20,19 +20,17 @@ content.setAttribute('class', 'h-100 fluid-container d-flex')
 
 const nav = displayNav()
 
-const title = renderTitle()
+const todo = todo_display()
 // console.log(title)
-
+// console.log('sup')
 content.appendChild(nav)
-content.appendChild(title)
-console.log(nav)
+content.appendChild(todo)
+// console.log(nav)
 
 
 const add_btn = document.querySelector('.add-btn');
 const menu_btn = document.querySelector('.menu-btn');
 const cancel_btn = document.querySelector('cancel_box');
-
-
 
 
 

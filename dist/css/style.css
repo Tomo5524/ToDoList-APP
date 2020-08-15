@@ -24,10 +24,24 @@ html,body{
     display: none;
 }
 
+.justify-self-start{
+    justify-self: flex-start;
+}
+
 /* header */
 /* .date-title{
     padding-top: 4rem;
 } */
+
+/* .fa-calendar-plus{
+    font-size: 22px;
+} */
+
+.today-date{
+    position: absolute;
+    top: 30px;
+    right: 10px;
+}
 
 /* modal */
 .overlay {
@@ -53,6 +67,64 @@ html,body{
 .border-r{
     border-right: 1px solid #333;
 }
+
+/* display when there is no todo list */
+.empty-state {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+  
+/* Add this below the other styles */
+.todo-list:empty {
+    display: none;
+}
+
+.todo-list:empty + .empty-state {
+    display: flex;
+}
+
+
+/* .check-box{
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    -webkit-appearance: none;
+  
+    cursor: pointer;
+} */
+
+.text-div {
+    flex: 1;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 22px;
+  }
+  
+  .done span {
+    text-decoration: line-through;
+  }
+
+.tick {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #333;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .tick::before { 
+    content: '✓';
+    font-size: 20px;
+    display: none;
+  }
 
 /* responsive text */
 

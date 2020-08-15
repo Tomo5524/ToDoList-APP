@@ -2,6 +2,7 @@ import Task from "./task.js"
 
 
 const renderTitle = () => {
+
     // const container = document.createElement('div');
     // container.setAttribute('class', 'main-container fluid-container d-flex');
 
@@ -51,56 +52,97 @@ const renderTitle = () => {
 
     const tasks_container = document.createElement('div');
     // container-fluid for a full width container,
-    tasks_container.setAttribute('class', ' task-container col-8');
+    tasks_container.setAttribute('class', 'task-container d-flex align-items-center justify-content-center col-8');
 
-    const date_title_box = document.createElement('div');
-    date_title_box.setAttribute('class', 'd-flex align-items-center');
+    const todo_list = document.createElement('ul');
+    todo_list.setAttribute('class', 'todo-list js-todo-list');
 
-    const folder_title = document.createElement('h3')
-    folder_title.setAttribute('class', 'task-title');
-    folder_title.innerHTML = 'Take a shower'
+    const empty_state = document.createElement('div');
+    // container-fluid for a full width container,
+    empty_state.setAttribute('class', 'empty-state');
 
-    const task_date = document.createElement('h6')
-    task_date.setAttribute('class', 'task-date');
-    task_date.innerHTML = '8/4/2020'
+    const btn_div = document.createElement('div');
+    btn_div.setAttribute('class', 'btn-div text-center');
 
-    const edit = document.createElement('button')
-    edit.setAttribute('class', 'btn edit-btn');
+    const add_task = document.createElement('button')
+    add_task.setAttribute('class', 'btn add-task-btn');
 
-    const edit_btn = document.createElement('i')
-    edit_btn.setAttribute('class', 'fas fa-edit');
-   
-    edit.appendChild(edit_btn)
+    const add_task_btn = document.createElement('i')
+    add_task_btn.setAttribute('class', "fas fa-calendar-plus fa-3x");
 
-    const remove = document.createElement('button')
-    remove.setAttribute('class', 'btn remove-btn');
+    add_task.appendChild(add_task_btn)
+    btn_div.appendChild(add_task)
 
-    const remove_btn = document.createElement('i')
-    remove_btn.setAttribute('class', "fas fa-trash-alt");
+    const add_text = document.createElement('h2');
+    add_text.setAttribute('class', "add-text");
+    add_text.innerHTML = "Add your first todo"
 
-    remove.appendChild(remove_btn)
+    const task_text = document.createElement('p');
+    // task_text.setAttribute('class', "add-text");
+    task_text.innerHTML = "What do you want to get done today?"
+    
+    empty_state.appendChild(btn_div)
+    empty_state.appendChild(add_text)
+    empty_state.appendChild(task_text)
 
-    date_title_box.appendChild(folder_title)
-    date_title_box.appendChild(task_date)
-    date_title_box.appendChild(edit)
-    date_title_box.appendChild(remove)
+    tasks_container.appendChild(todo_list)
+    tasks_container.appendChild(empty_state)
 
-    tasks_container.appendChild(date_title_box)
 
-    // container.appendChild(title__menu_container)
-    // container.appendChild(tasks_container)
+    // const date_title_box = document.createElement('div');
+    // date_title_box.setAttribute('class', 'd-flex align-items-center');
 
-    edit.addEventListener('click', e => {
-        console.log('edit hit')
-        const a = Task()
-        console.log(a)
-        console.log(a.show_project())
+    // const folder_title = document.createElement('h3')
+    // folder_title.setAttribute('class', 'task-title');
+    // folder_title.innerHTML = 'Take a shower'
 
-        // Task.show_task()
+    // const task_date = document.createElement('h6')
+    // task_date.setAttribute('class', 'task-date');
+    // task_date.innerHTML = '8/4/2020'
+
+    // const edit = document.createElement('button')
+    // edit.setAttribute('class', 'btn edit-btn');
+
+    // const edit_btn = document.createElement('i')
+    // edit_btn.setAttribute('class', 'fas fa-edit');
+    
+    // edit.appendChild(edit_btn)
+
+    // const remove = document.createElement('button')
+    // remove.setAttribute('class', 'btn remove-btn');
+
+    // const remove_btn = document.createElement('i')
+    // remove_btn.setAttribute('class', "fas fa-trash-alt");
+
+    // remove.appendChild(remove_btn)
+
+    // date_title_box.appendChild(folder_title)
+    // date_title_box.appendChild(task_date)
+    // date_title_box.appendChild(edit)
+    // date_title_box.appendChild(remove)
+
+    // const ul = document.createElement('ul');
+    // ul.setAttribute('class', "todo-list");
+
+    // tasks_container.appendChild(date_title_box)
+    // // tasks_container.appendChild(ul)
+
+    // // container.appendChild(title__menu_container)
+    // // container.appendChild(tasks_container)
+
+    // edit.addEventListener('click', e => {
+    //     console.log('edit hit')
+    //     const a = Task()
+    //     console.log(a)
+    //     console.log(a.getObj())
+
+    //     // Task.show_task()
         
-    })
+    // })
 
+    // can return multiple elements?
     return tasks_container
+
 }
 
 export default renderTitle
