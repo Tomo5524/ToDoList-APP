@@ -126,11 +126,24 @@ html,body{
     display: none;
   }
 
+/* project input */
+.project-input{
+    background: none;
+    margin-left: 1em;
+    border-bottom: 1px solid #333;
+}
+
 /* responsive text */
 
+
 /* @media (min-width: 576px) {
-    html { font-size: 1.25rem; }
+
+    html { font-size: 1.25rem; 
+    
+    }
+
 }
+
 @media (min-width: 768px) {
     html { font-size: 1.5rem; }
 }
@@ -139,4 +152,27 @@ html,body{
 }
 @media (min-width: 1200px) {
     html { font-size: 2rem; }
-} */
+}  */
+
+
+@media (max-width: 768px) {
+
+    /* html { font-size: 1.25rem; 
+    
+    } */
+
+    .priority-div {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* html { font-size: 1.25rem; 
+    
+    } */
+
+    .start_div {
+        padding-bottom: 20px;
+    }
+}

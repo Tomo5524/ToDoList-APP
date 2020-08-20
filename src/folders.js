@@ -2,7 +2,10 @@ import closeItem from "./close.js"
 
 const displayFolder = () =>{
 
-    console.log('folder called')
+    // console.log('folder called')
+
+    // const form = document.createElement('form');
+    // form.setAttribute('class', 'form');
 
     // console.log('folder')
     const overlay = document.createElement('div');
@@ -14,95 +17,134 @@ const displayFolder = () =>{
     }
 
     const container = document.createElement('div');
-    container.setAttribute('class', 'folder-cotainer h-100 bg-light col-5');
+    container.setAttribute('class', 'folder-cotainer h-100 bg-light col-4');
 
+    const icon_div = document.createElement('div');
+    icon_div.setAttribute('class', 'folder-icon-div d-flex justify-content-between');
+
+    const folder_add = document.createElement('button');
+    folder_add.setAttribute('class', 'btn folder_add');
+
+    const folder_add_icon = document.createElement('i');
+    folder_add_icon.setAttribute('class', 'fas fa-folder-plus');
+   
     const remove_btn = document.createElement('button');
-    remove_btn.setAttribute('class', 'remove_btn mt-4');
+    remove_btn.setAttribute('class', 'btn remove_btn');
 
     const remove_icon = document.createElement('i');
     remove_icon.setAttribute('class', 'fas fa-times');
 
+    folder_add.appendChild(folder_add_icon)
     remove_btn.appendChild(remove_icon)
 
-    const project_div = document.createElement('div');
-    project_div.setAttribute('class', 'project-div py-3');
+    icon_div.appendChild(remove_btn)
+    icon_div.appendChild(folder_add)
+
+    const folder_div = document.createElement('div');
+    folder_div.setAttribute('class', 'folder-div py-3');
 
     const header = document.createElement('h1');
-    header.setAttribute('class', 'folder-heder');
+    header.setAttribute('class', 'folder-heder pb-3');
     header.innerHTML = 'Project'
 
     const add_project = document.createElement('button')
     add_project.setAttribute('class', 'project-add-btn');
 
+    const project_div = document.createElement('div');
+    project_div.setAttribute('class', 'project-div');
+
+    const project_div_input = document.createElement('div');
+    project_div_input.setAttribute('class', 'project-div-input no-display');
+
+    const project_input = document.createElement('input');
+    project_input.setAttribute('class', 'project-input');
+    project_input.setAttribute('placeholder', 'new project');
+
+    
+
+    const add_cancel_div = document.createElement('div');
+    add_cancel_div.setAttribute('class', 'add-cancel-div d-flex p-3');
+
+    const add_div = document.createElement('div');
+    add_div.setAttribute('class', 'add-div mr-5');
+
+    const add_btn = document.createElement('button');
+    add_btn.setAttribute('class', 'add-box border');
+    add_btn.innerHTML = 'Add'
+    add_btn.type = 'submit'
+
+    add_div.appendChild(add_btn)
+
+    const cancel_div = document.createElement('div');
+    cancel_div.setAttribute('class', 'cancel-div ml-5');
+
+    const cancel_box = document.createElement('button');
+    cancel_box.setAttribute('class', 'cancel-box border');
+    cancel_box.innerHTML = 'Cancel'
+
+    cancel_div.appendChild(cancel_box)
+
+    add_cancel_div.appendChild(add_div)
+    add_cancel_div.appendChild(cancel_div)
+
+    project_div_input.appendChild(project_input)
+    project_div_input.appendChild(add_cancel_div)
+
     // when clicked, it takes user to today's folder
-    const today = document.createElement('h3');
-    today.setAttribute('class', 'today-text');
-    today.innerHTML = 'Today'
+    // const today = document.createElement('h3');
+    // today.setAttribute('class', 'today-text');
+    // today.innerHTML = 'Today'
 
-    const test1 = document.createElement('h3');
-    test1.setAttribute('class', 'test-text');
-    test1.innerHTML = 'test1'
+    // const test1 = document.createElement('h3');
+    // test1.setAttribute('class', 'test-text');
+    // test1.innerHTML = 'test1'
 
-    const test2 = document.createElement('h3');
-    test2.setAttribute('class', 'test-text');
-    test2.innerHTML = 'test2'
+    // const test2 = document.createElement('h3');
+    // test2.setAttribute('class', 'test-text');
+    // test2.innerHTML = 'test2'
 
-    project_div.appendChild(header)
-    project_div.appendChild(add_project)
-    project_div.appendChild(today)
-    project_div.appendChild(test1)
-    project_div.appendChild(test2)
+    folder_div.appendChild(header)
+    folder_div.appendChild(project_div_input)
+    folder_div.appendChild(project_div)
+    
 
-
-    // const nav = document.createElement('div');
-    // nav.setAttribute('class', 'nav d-flex justify-content-between align-items-center');
-
-    // const title_div = document.createElement('div');
-    // title_div.setAttribute('class', 'title-div');
-
-    // const title = document.createElement('h1');
-    // title.setAttribute('class', 'logo');
-    // title.innerHTML = 'TodoList'
-
-    // title_div.appendChild(title)
-
-
-    // const menu_add = document.createElement('div');
-    // menu_add.setAttribute('class', 'menu-add-div');
-
-    // const menu = document.createElement('button')
-    // menu.setAttribute('class', 'btn menu-btn');
-
-    // const menu_btn = document.createElement('i');
-    // menu_btn.setAttribute('class', 'fas fa-bars');
-
-    // menu.appendChild(menu_btn)
-
-    // const add = document.createElement('button')
-    // add.setAttribute('class', 'btn add-btn');
-
-    // const add_btn = document.createElement('i')
-    // add_btn.setAttribute('class', "fas fa-plus");
-
-    // add.appendChild(add_btn)
-
-    // menu_add.appendChild(menu)
-    // menu_add.appendChild(add)
-
-    // nav.appendChild(title_div)
-    // nav.appendChild(menu_add)
-
-    // title__menu_container.appendChild(nav)
-
-    container.appendChild(remove_btn)
-    container.appendChild(project_div)
+    container.appendChild(icon_div)
+    container.appendChild(folder_div)
 
     overlay.appendChild(container)
 
     // totally works
-    remove_btn.addEventListener('click', e => {
+    // close project
+    remove_btn.addEventListener('click', (e) => {
         closeItem(overlay)
         // overlay.display = overlay.display === 'block' ? 'none' : 'block'
+    })
+
+    folder_add.addEventListener('click', (e) => {
+       
+        
+        if (project_div_input.classList.contains('no-display')){
+            console.log('meow')
+            project_div_input.classList.remove('no-display')
+        }
+        
+        // overlay.display = overlay.display === 'block' ? 'none' : 'block'
+    })
+
+    add_btn.addEventListener('click', (e) =>{
+        // if project_input.classs?
+        console.log(project_div_input)
+        const project_title = document.createElement('h3');
+        project_title.setAttribute('class', 'project-title py-2');
+        project_title.innerHTML = project_input.value
+        project_div.appendChild(project_title)
+        project_input.value = ''
+        closeItem(project_div_input)
+    })
+
+    cancel_box.addEventListener('click', e => {
+        closeItem(project_div_input)
+               
     })
 
     return overlay

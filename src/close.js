@@ -1,9 +1,9 @@
 
 const closeItem = (item) =>{
-
-    item.addEventListener('click', e => {
-        item.classList.add('no-display')
-    })
+    item.classList.add('no-display')
+    // item.addEventListener('click', e => {
+    //     item.classList.add('no-display')
+    // })
 
 }
 
