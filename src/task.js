@@ -39,7 +39,7 @@ const Task = (function() {
             start,
             end,
             priority,
-            check : false,  
+            completed : false,  
             id : Date.now()
         }
 
@@ -79,6 +79,20 @@ const Task = (function() {
         return todoItems_project
     }
 
+    const edit_todo = (title,desc,date,start,end,priority,completed,id) => {
+        // console.log(obj)
+        const cur_todo = getTask(id)
+        console.log(cur_todo)
+        cur_todo.title = title
+        cur_todo.desc = desc
+        cur_todo.date = date
+        cur_todo.start = start
+        cur_todo.end = end
+        cur_todo.priority = priority
+        console.log(show_project())
+        return cur_todo
+    }
+
     const display_todo = () => {
         // for localstorage display
         for (let i = 0; i < todoItems_project.length; i++){
@@ -96,6 +110,7 @@ const Task = (function() {
             add_task, 
             remove_todo, 
             show_project,
+            edit_todo,
             display_todo}
 })();
 

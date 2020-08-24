@@ -1,7 +1,10 @@
 import Task from "./task.js"
+import renderForm from "./form.js"
 
 
 const todo_display = () => {
+
+    const container = document.querySelector('#content')
 
     const tasks_container = document.createElement('div');
     // container-fluid for a full width container,
@@ -63,6 +66,20 @@ const todo_display = () => {
     tasks_container.appendChild(today_date)
     tasks_container.appendChild(todo_list)
     tasks_container.appendChild(empty_state)
+
+    add_task.addEventListener('click', e => {
+        // console.log(e.target, 'add btn clicked')
+        const form = renderForm(e.target)
+        // console.log(form)
+        // console.log(e.target)
+        content.appendChild(form)
+    
+        // totally works
+        // const div = document.createElement('div')
+        // div.setAttribute('class', 'border');
+        // div.innerHTML = 'Meow'
+        // nav.appendChild(div)
+    })
     
     return tasks_container
 

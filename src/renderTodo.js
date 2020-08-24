@@ -1,14 +1,10 @@
 import todo_display from "./todoDisplay.js"
 import Task from "./task.js"
 import getTime from "./time.js"
+import renderForm from "./form.js"
+
 
 const render_Todo = (obj) => {
-
-    // console.log('obj here')
-    // console.log(obj.title)
-    
-    // append new todo to container
-    // const container = todo_display()
 
     // const ul = container.childNodes[0] // does not work
     const ul = document.querySelector('.todo-list');
@@ -22,7 +18,7 @@ const render_Todo = (obj) => {
     // l.add_task(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
     const node = document.createElement("li");
     node.setAttribute('id', `${obj.id}`);
-    node.setAttribute('class', 'd-flex justify-content-between align-items-center py-3');
+    node.setAttribute('class', 'd-flex justify-content-between align-items-center py-3 border rounded');
 
     const check_box = document.createElement("input");
     check_box.setAttribute('type', 'checkbox');
@@ -31,7 +27,7 @@ const render_Todo = (obj) => {
 
     const check_label = document.createElement("label");
     check_label.setAttribute('id', `${obj.id}`);
-    check_label.setAttribute('class', 'tick');
+    check_label.setAttribute('class', 'tick ml-3');
 
     const text_div = document.createElement("div");
     text_div.setAttribute('class', 'text-div w-100 text-center');
@@ -68,6 +64,7 @@ const render_Todo = (obj) => {
 
     const edit_btn = document.createElement("button");
     edit_btn.setAttribute('class', 'btn edit-btn');
+    edit_btn.style = 'background-color: Transparent'
 
     const edit_icon = document.createElement("i");
     edit_icon.setAttribute('class', "fas fa-edit");
@@ -94,6 +91,35 @@ const render_Todo = (obj) => {
     // const l = Task()
     // console.log('see projects')
     // console.log(l.show_project())
+
+    // create controller that handles all addEventListener?
+
+    check_label.addEventListener('click', e => {
+        obj.completed = obj.completed ? false : true;
+        // add check mark
+        if (obj.completed) {
+            check_label.innerHTML = '✓';
+            // check_label.innerHTML = '😄';
+            text_div.classList.add('text-lign-through')
+            // console.log('checked')
+
+        }
+
+        else{
+            check_label.innerHTML = '';
+            text_div.classList.remove('text-lign-through')
+        }
+        // console.log(obj.completed)
+        // console.log(Task.show_project());
+    });
+
+    edit_btn.addEventListener('click', e => {
+        // console.log('form activated')
+        const container = document.querySelector('#content')
+        const form = renderForm(e.target,obj)
+        // editForm(obj) 2 lines above go into editform function
+        container.appendChild(form)
+    });
     
 
     delete_btn.addEventListener('click', e => {

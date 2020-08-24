@@ -37,7 +37,7 @@ const cancel_btn = document.querySelector('cancel_box');
 //How to disable background when modal window pops up
 // https://stackoverflow.com/questions/45607982/how-to-disable-background-when-modal-window-pops-up
 add_btn.addEventListener('click', e => {
-    const form = renderForm()
+    const form = renderForm(e.target)
 // console.log(form)
     // console.log(e.target)
     content.appendChild(form)

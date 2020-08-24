@@ -15,6 +15,12 @@ html,body{
     border: 1px solid #333333;
 }
 
+/* get rid of blue outline when clicked */
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
 /* utility */
 .display{
     display: block;
@@ -27,6 +33,11 @@ html,body{
 .justify-self-start{
     justify-self: flex-start;
 }
+.text-lign-through{
+    text-decoration: line-through;
+}
+
+
 
 /* header */
 /* .date-title{
@@ -102,7 +113,7 @@ html,body{
     flex: 1;
     margin-left: 10px;
     margin-right: 10px;
-    font-size: 22px;
+    font-size: 1rem;
   }
   
   .done span {

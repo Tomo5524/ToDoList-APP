@@ -32,10 +32,10 @@ const displayNav = () => {
     const add = document.createElement('button')
     add.setAttribute('class', 'btn add-btn');
 
-    const add_btn = document.createElement('i')
-    add_btn.setAttribute('class', "fas fa-plus");
+    const addBtn = document.createElement('i')
+    addBtn.setAttribute('class', "fas fa-plus");
 
-    add.appendChild(add_btn)
+    add.appendChild(addBtn)
 
     menu_add.appendChild(menu)
     menu_add.appendChild(add)

@@ -2,10 +2,18 @@ import Task from "./task.js"
 import closeItem from "./close.js"
 import render_Todo from "./renderTodo.js"
 
-const renderForm = () => {
+// ele determines if current element is a new todo or edit
+// ele is passed in as Rest Parameter so it can handle edit that will have 2 elements (class-attribute and object)
+const renderForm = (...ele) => {
 
     // const form = document.createElement('form');
     // form.setAttribute('class', 'form');
+    // console.log(ele[0], 'ele')
+    // console.log(ele.classList, 'ele.classList')
+
+    // handle both situations  when buton and i are clicked 
+    let cur_ele = ((ele[0].classList.contains('fa-edit')) || (ele[0].classList.contains('edit-btn'))) ? 'edit' : 'add-btn'
+    // console.log(cur_ele,'cur_ele')
 
     const overlay = document.createElement('div');
     overlay.setAttribute('class', 'overlay');
@@ -200,7 +208,7 @@ const renderForm = () => {
     const add_btn = document.createElement('button');
     add_btn.setAttribute('class', 'add-box border');
     add_btn.innerHTML = 'Add'
-    add_btn.type = 'submit'
+    // add_btn.type = 'submit'
 
     add_div.appendChild(add_btn)
 
@@ -226,37 +234,75 @@ const renderForm = () => {
     overlay.appendChild(modal)
     // form.appendChild(overlay)
 
+    // create different that renders form?
+    // const form_handler = () => {
+    //     // by creating this, edit has acess to form and can just edit
+    //     const ad_btn = document.querySelector('.add-box')
+
+    // }
+
     // let l = Task()
     // submit
     // form.addEventListener('submit', e
     // submit and click are pretty much same
-    add_div.addEventListener('click', e => {
 
-        // console.log('submit')
-        // console.log(e)   
-        e.preventDefault()        
+    if (cur_ele == 'edit') {
+        console.log('edit')
+        // when editing, obj already exists so we have acess to obj
+        let obj = ele[1]
 
-        // how can i read obj in title file
+        // render values
+        title_box.value = obj.title
+        dscr_box.value = obj.desc
+        start.value = obj.start
+        end.value = obj.end
+        add_btn.addEventListener('click', e => {
 
-        // Get the value of the input and remove whitespace
-        // let l = Task()
-        // console.log(start.value)
-        // l.add_task(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
-        // render_Todo(l.getObj())
-        if (title_box.value.trim()){
-            const newObj = Task.add_task(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value)
-            console.log(Task.show_project())
-            // let newObj = Task.getObj(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value)
-            // render_Todo(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
-            render_Todo(newObj)
+            // console.log('submit')
+            // console.log(e)   
+            e.preventDefault();
+            const edit_task = Task.edit_todo(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value,obj.completed,obj.id)
+            render_Todo(edit_task)
             closeItem(overlay)
-        }
+            // Task.edit_todo()
+            // console.log(ele[1])
 
-        else{
-            console.log('need title')
-        }
-        
-    })
+        })
+    }
+
+    else {
+        add_btn.addEventListener('click', e => {
+
+            // console.log('submit')
+            // console.log(e)   
+            e.preventDefault();
+    
+            // how can i read obj in title file
+            // self-excution of task
+    
+            // Get the value of the input and remove whitespace
+            // l.add_task(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
+            // render_Todo(l.getObj())
+    
+            // make sure user inputs todo's title
+            if (title_box.value.trim()){
+                const newObj = Task.add_task(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value)
+                console.log(Task.show_project())
+                // let newObj = Task.getObj(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value)
+                // render_Todo(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
+                render_Todo(newObj)
+                closeItem(overlay)
+            }
+    
+            else{
+                // handle when title is not entered
+                console.log('need title')
+            }
+            
+        })
+    }
+
+    
 
     cancel_box.addEventListener('click', e => {
         closeItem(overlay)
