@@ -1,6 +1,7 @@
 import Task from "./task.js"
 import closeItem from "./close.js"
 import render_Todo from "./renderTodo.js"
+import render_edit_todo from "./edit.js"
 
 // ele determines if current element is a new todo or edit
 // ele is passed in as Rest Parameter so it can handle edit that will have 2 elements (class-attribute and object)
@@ -247,9 +248,10 @@ const renderForm = (...ele) => {
     // submit and click are pretty much same
 
     if (cur_ele == 'edit') {
-        console.log('edit')
+        // console.log('edit')
         // when editing, obj already exists so we have acess to obj
         let obj = ele[1]
+        // let previous_id = obj.id
 
         // render values
         title_box.value = obj.title
@@ -262,7 +264,8 @@ const renderForm = (...ele) => {
             // console.log(e)   
             e.preventDefault();
             const edit_task = Task.edit_todo(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value,obj.completed,obj.id)
-            render_Todo(edit_task)
+            render_Todo(edit_task,ele[0])
+            // render_Todo(edit_task)
             closeItem(overlay)
             // Task.edit_todo()
             // console.log(ele[1])

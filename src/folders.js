@@ -91,9 +91,9 @@ const displayFolder = () =>{
     project_div_input.appendChild(add_cancel_div)
 
     // when clicked, it takes user to today's folder
-    // const today = document.createElement('h3');
-    // today.setAttribute('class', 'today-text');
-    // today.innerHTML = 'Today'
+    const today = document.createElement('h3');
+    today.setAttribute('class', 'today-text');
+    today.innerHTML = 'Today'
 
     // const test1 = document.createElement('h3');
     // test1.setAttribute('class', 'test-text');
@@ -105,7 +105,9 @@ const displayFolder = () =>{
 
     folder_div.appendChild(header)
     folder_div.appendChild(project_div_input)
+    folder_div.appendChild(today)
     folder_div.appendChild(project_div)
+    
     
 
     container.appendChild(icon_div)
@@ -124,7 +126,7 @@ const displayFolder = () =>{
        
         
         if (project_div_input.classList.contains('no-display')){
-            console.log('meow')
+            // console.log('meow')
             project_div_input.classList.remove('no-display')
         }
         
@@ -133,7 +135,7 @@ const displayFolder = () =>{
 
     add_btn.addEventListener('click', (e) =>{
         // if project_input.classs?
-        console.log(project_div_input)
+        // console.log(project_div_input)
         const project_title = document.createElement('h3');
         project_title.setAttribute('class', 'project-title py-2');
         project_title.innerHTML = project_input.value

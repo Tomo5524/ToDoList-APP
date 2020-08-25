@@ -39,7 +39,8 @@ const Task = (function() {
             start,
             end,
             priority,
-            completed : false,  
+            completed : false,
+            edit : false,
             id : Date.now()
         }
 
@@ -89,6 +90,8 @@ const Task = (function() {
         cur_todo.start = start
         cur_todo.end = end
         cur_todo.priority = priority
+        cur_todo.edit = true;
+        // cur_todo.id = Date.now()
         console.log(show_project())
         return cur_todo
     }

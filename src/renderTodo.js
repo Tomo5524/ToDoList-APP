@@ -4,9 +4,11 @@ import getTime from "./time.js"
 import renderForm from "./form.js"
 
 
-const render_Todo = (obj) => {
+const render_Todo = (...args) => {
 
     // const ul = container.childNodes[0] // does not work
+    // console.log(args[1],'arg1 - element')
+    const obj = args[0]
     const ul = document.querySelector('.todo-list');
     // console.log('ul here')
     // console.log(ul)
@@ -37,6 +39,7 @@ const render_Todo = (obj) => {
     text.innerHTML = obj.title
    
     const tex_dscr = document.createElement("p");
+    tex_dscr.setAttribute('class','todo-description')
     tex_dscr.innerHTML = obj.desc
 
     const start_end_div = document.createElement("div");
@@ -44,11 +47,12 @@ const render_Todo = (obj) => {
 
     if (obj.start !== '' && obj.end !== ''){
         const start_text = document.createElement("p");
-        console.log(obj.start)
+        start_text.setAttribute('class','todo-start-time')
+        // console.log(obj.start)
         start_text.innerHTML = 'Start: ' + getTime(obj.start);
 
         const end_text = document.createElement("p");
-        end_text.setAttribute('class','end-text pl-5')
+        end_text.setAttribute('class','todo-end-time pl-5')
         end_text.innerHTML = 'End: ' + getTime(obj.end);
 
         start_end_div.appendChild(start_text)
@@ -64,10 +68,12 @@ const render_Todo = (obj) => {
 
     const edit_btn = document.createElement("button");
     edit_btn.setAttribute('class', 'btn edit-btn');
+    // edit_btn.setAttribute('id', `${obj.id}`);
     edit_btn.style = 'background-color: Transparent'
 
     const edit_icon = document.createElement("i");
     edit_icon.setAttribute('class', "fas fa-edit");
+    // edit_icon.setAttribute('id', `${obj.id}`);
     
     edit_btn.appendChild(edit_icon)
 
@@ -94,6 +100,12 @@ const render_Todo = (obj) => {
 
     // create controller that handles all addEventListener?
 
+    // if todo is created for the first time, append new list
+    // if (!obj.edit){
+    //     console.log('edit added')
+    //     ul.appendChild(node)
+    // }
+
     check_label.addEventListener('click', e => {
         obj.completed = obj.completed ? false : true;
         // add check mark
@@ -115,6 +127,7 @@ const render_Todo = (obj) => {
 
     edit_btn.addEventListener('click', e => {
         // console.log('form activated')
+        console.log(e.target,'edit clicked')
         const container = document.querySelector('#content')
         const form = renderForm(e.target,obj)
         // editForm(obj) 2 lines above go into editform function
@@ -142,7 +155,25 @@ const render_Todo = (obj) => {
         
     })
 
-    ul.appendChild(node)
+    // if todo is created for the first time, append new list
+    if (!obj.edit){
+        console.log('u is a rookie')
+        ul.appendChild(node)
+    }
+
+    // edit existing todo
+    else{
+        console.log('show list after editing',Task.show_project())
+        let previous_node = args[1]
+        while (!previous_node.hasAttribute('id')){
+            previous_node = previous_node.parentNode
+        }
+        ul.replaceChild(node,previous_node)
+    }
+
+    
+
+    
 
     // const task_div = document.createElement('li')
     
