@@ -54,7 +54,7 @@ menu_btn.addEventListener('click', e => {
     // calling displayFoloer makes it possible to close window
     const folder = displayFolder()
     // console.log(folder)
-    console.log(e.target)
+    // console.log(e.target)
     console.log('open folder')
     // folder.display = 'block'
     content.appendChild(folder)

@@ -157,7 +157,7 @@ const render_Todo = (...args) => {
 
     // if todo is created for the first time, append new list
     if (!obj.edit){
-        console.log('u is a rookie')
+        // console.log('u is a rookie')
         ul.appendChild(node)
     }
 

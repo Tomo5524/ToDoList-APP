@@ -290,7 +290,7 @@ const renderForm = (...ele) => {
             // make sure user inputs todo's title
             if (title_box.value.trim()){
                 const newObj = Task.add_task(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value)
-                console.log(Task.show_project())
+                // console.log(Task.show_project(),'after add in form clicked')
                 // let newObj = Task.getObj(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value)
                 // render_Todo(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
                 render_Todo(newObj)

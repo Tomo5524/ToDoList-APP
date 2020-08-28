@@ -1,4 +1,5 @@
 import closeItem from "./close.js"
+import Task from "./task.js"
 
 const displayFolder = () =>{
 
@@ -93,7 +94,11 @@ const displayFolder = () =>{
     // when clicked, it takes user to today's folder
     const today = document.createElement('h3');
     today.setAttribute('class', 'today-text');
-    today.innerHTML = 'Today'
+    today.innerHTML = 'Today';
+
+    // let cur_project = today.innerHTML
+
+    // today is the default folder
 
     // const test1 = document.createElement('h3');
     // test1.setAttribute('class', 'test-text');
@@ -136,12 +141,21 @@ const displayFolder = () =>{
     add_btn.addEventListener('click', (e) =>{
         // if project_input.classs?
         // console.log(project_div_input)
-        const project_title = document.createElement('h3');
-        project_title.setAttribute('class', 'project-title py-2');
-        project_title.innerHTML = project_input.value
-        project_div.appendChild(project_title)
-        project_input.value = ''
-        closeItem(project_div_input)
+        if (project_input.value !== '' && Task.add_project(project_input.value)){
+            const project_title = document.createElement('h3');
+            project_title.setAttribute('class', 'project-title py-2');
+            project_title.innerHTML = project_input.value
+            project_div.appendChild(project_title)
+            Task.cur_project = project_input.value
+            console.log(Task.cur_project)
+            project_input.value = ''
+            closeItem(project_div_input)
+        }
+
+        else{
+            console.log('already exist or invalid value')
+        }
+        
     })
 
     cancel_box.addEventListener('click', e => {
