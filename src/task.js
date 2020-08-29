@@ -36,6 +36,8 @@ const Task = (function() {
                     console.log(todo,'cur_obj')
                     if (todo.id === given_id){
                         console.log(todoItems_project[i][key],'returned todo')
+                        // todoItems_project[i][key] = all todo in key(project name)
+
                         return todo
                     }
                 }
@@ -46,8 +48,11 @@ const Task = (function() {
 
     let hashset = new Set()
     let cur_project = 'Today'; // dfaults to toady for the first time
-    // let first_obj = {};
-    // new_obj_project[new_project] = []
+    let default_project = {};
+    default_project[cur_project] = []
+    todoItems_project.push(default_project)
+
+    const get_current_projece = () => cur_project
 
     const add_project = (new_project) => {
 
@@ -95,11 +100,7 @@ const Task = (function() {
                     todoItems_project[i][cur_project].push(new_obj) 
                 };
             }
-        
-        
-
         };
-
         // todoItems_project[cur_project].push(new_obj)
         // todoItems_project.push(new_obj)
         // todoItems_date.push(new_obj)
@@ -139,49 +140,34 @@ const Task = (function() {
             }
         }
 
-        // for (let i = 0; i < todoItems_project.length; i++){
-        //     console.log(todoItems_project[i],'cur_pro list')
-        //     // loop through each todo in current project by key(project)
-        //     for (let key of Object.keys(todoItems_project[i])) { 
-        //         console.log(key,'cur project name')
-        //         // loop through each item in current todo 
-        //         // [
-        //         //     [0 : {'project':
-        //         //         [0 : {title:'title'}]
-        //         //         }
-        //         //     ]
-        //         // ]
-        //         console.log(todoItems_project[i][key],'cur project todos')
-        //         for (let j = 0; i < todoItems_project[i][key].length; i++){ 
-        //             console.log(todoItems_project[i][key][j],'cur_obj')
-        //             if (todoItems_project[i][key][j].id == todo.id){
-        //                 console.log(todoItems_project[i][key],'todos of cur_projecrt')
-        //                 todoItems_project[i][key].splice(index, 1);
-        //             }
-        //         }
-        //     }
-        // }
-
-
-        // console.log(todo.id,'delete_id')
-        // let index = -1;
-        // // console.log(todoItems_project.length)
-        // for (let i = 0; i < todoItems_project.length; i++){
-        //     // console.log(todoItems_project[i].id,'odoItems_project[i].id')
-        //     // console.log(todo.id,'todo.id')
-
-        //     // two equals evaluates only value not type. 
-        //     if (todoItems_project[i].id == todo.id){
-        //         index = i
-        //     }
-        // }
-        // // const index = todoItems_project.indexOf(todo.id);
-        // // console.log(index,'index')
-        // if (index > -1) {
-        //     todoItems_project.splice(index, 1);
-        //     // console.log(todoItems_project,'remov project')
-        // }
+        
     };
+
+    const remove_project = (project) => {
+      
+        for (let i = 0; i < todoItems_project.length; i++){
+            // console.log(todoItems_project[i],'cur_pro list')
+            // loop through each todo in current project by key(project)
+            for (let key of Object.keys(todoItems_project[i])) { 
+                // console.log(key,'cur project name')
+                // loop through each item in current todo 
+                if (key == project){
+                    todoItems_project.splice(i, 1)
+                }
+                // for (let obj of todoItems_project[i][key]){ 
+                //     // console.log(obj,'cur_obj')
+                //     // console.log(todo.id,'todo.id')
+                //     // console.log(obj.id,'obj.id')
+                //     if (todo.id == obj.id){
+                //         todoItems_project[i][key].splice(ind, 1);
+                //         console.log(todoItems_project[i][key],'cur project todos after removed')
+                //         return 
+                //     }
+                //     ind++
+                // }
+            }
+        }
+    }
 
     // const show_project = () => todoItems_project
     function show_project(){
@@ -204,12 +190,27 @@ const Task = (function() {
         return cur_todo
     }
 
-    const display_todo = () => {
+    const display_todo = (given_project) => {
         // for localstorage display
         for (let i = 0; i < todoItems_project.length; i++){
-            let todo = todoItems_project[i];
-            render_Todo(todo)
+            // console.log(todoItems_project[i],'cur_pro list')
+            // loop through each todo in current project by key(project)
+            for (let key of Object.keys(todoItems_project[i])) { 
+                // console.log(key,'cur project name')
+                // loop through each item in current todo 
+                if (key == given_project){
+                    for (let obj of todoItems_project[i][key]){ 
+                        render_Todo(obj)
+                    }
+                }
+            }
+                
         }
+
+        // for (let i = 0; i < todoItems_project.length; i++){
+        //     let todo = todoItems_project[i];
+        //     render_Todo(todo)
+        // }
     }
 
     // console.log('class created')
@@ -219,9 +220,11 @@ const Task = (function() {
             todoItems_date,
             cur_project,
             getTask, 
+            get_current_projece,
             add_project,
             add_task, 
             remove_todo, 
+            remove_project,
             show_project,
             edit_todo,
             display_todo}
@@ -281,3 +284,48 @@ export default Task
 
         // console.log(a[0][0]['project'][0].title)
         // console.log(a[0][0]['project'][1].title)
+
+
+// remove_todo 
+// for (let i = 0; i < todoItems_project.length; i++){
+        //     console.log(todoItems_project[i],'cur_pro list')
+        //     // loop through each todo in current project by key(project)
+        //     for (let key of Object.keys(todoItems_project[i])) { 
+        //         console.log(key,'cur project name')
+        //         // loop through each item in current todo 
+        //         // [
+        //         //     [0 : {'project':
+        //         //         [0 : {title:'title'}]
+        //         //         }
+        //         //     ]
+        //         // ]
+        //         console.log(todoItems_project[i][key],'cur project todos')
+        //         for (let j = 0; i < todoItems_project[i][key].length; i++){ 
+        //             console.log(todoItems_project[i][key][j],'cur_obj')
+        //             if (todoItems_project[i][key][j].id == todo.id){
+        //                 console.log(todoItems_project[i][key],'todos of cur_projecrt')
+        //                 todoItems_project[i][key].splice(index, 1);
+        //             }
+        //         }
+        //     }
+        // }
+
+
+        // console.log(todo.id,'delete_id')
+        // let index = -1;
+        // // console.log(todoItems_project.length)
+        // for (let i = 0; i < todoItems_project.length; i++){
+        //     // console.log(todoItems_project[i].id,'odoItems_project[i].id')
+        //     // console.log(todo.id,'todo.id')
+
+        //     // two equals evaluates only value not type. 
+        //     if (todoItems_project[i].id == todo.id){
+        //         index = i
+        //     }
+        // }
+        // // const index = todoItems_project.indexOf(todo.id);
+        // // console.log(index,'index')
+        // if (index > -1) {
+        //     todoItems_project.splice(index, 1);
+        //     // console.log(todoItems_project,'remov project')
+        // }

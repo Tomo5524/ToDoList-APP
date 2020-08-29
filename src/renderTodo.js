@@ -134,7 +134,7 @@ const render_Todo = (...args) => {
         container.appendChild(form)
     });
     
-
+    // use this to delte all todos currently displayed
     delete_btn.addEventListener('click', e => {
         let node = e.target
         while (!node.hasAttribute('id')){

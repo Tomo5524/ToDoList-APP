@@ -22,6 +22,11 @@ html,body{
  }
 
 /* utility */
+.btn{
+    margin: .375rem .75rem;
+    padding: 0;
+}
+
 .display{
     display: block;
 }
@@ -142,6 +147,11 @@ html,body{
     background: none;
     margin-left: 1em;
     border-bottom: 1px solid #333;
+}
+
+.project-title{
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 /* responsive text */

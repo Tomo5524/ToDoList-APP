@@ -27,10 +27,18 @@ content.appendChild(nav)
 content.appendChild(todo)
 // console.log(nav)
 
+const folder = displayFolder()
+console.log(folder)
+// console.log(e.target)
+console.log('open folder')
+// folder.display = 'block'
+nav.appendChild(folder)
+
 
 const add_btn = document.querySelector('.add-btn');
-const menu_btn = document.querySelector('.menu-btn');
-const cancel_btn = document.querySelector('cancel_box');
+// const menu_btn = document.querySelector('.menu-btn');
+// const cancel_btn = document.querySelector('cancel_box');
+
 
 
 
@@ -49,16 +57,16 @@ add_btn.addEventListener('click', e => {
     // nav.appendChild(div)
 })
 
-menu_btn.addEventListener('click', e => {
+// menu_btn.addEventListener('click', e => {
 
-    // calling displayFoloer makes it possible to close window
-    const folder = displayFolder()
-    // console.log(folder)
-    // console.log(e.target)
-    console.log('open folder')
-    // folder.display = 'block'
-    content.appendChild(folder)
-})
+//     // calling displayFoloer makes it possible to close window
+//     const folder = displayFolder()
+//     // console.log(folder)
+//     // console.log(e.target)
+//     console.log('open folder')
+//     // folder.display = 'block'
+//     content.appendChild(folder)
+// })
 
 // cancel_btn.addEventListener('click', e => {
 
