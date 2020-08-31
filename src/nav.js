@@ -48,6 +48,14 @@ const displayNav = () => {
     const folder_todo_add = document.createElement('div');
     folder_todo_add.setAttribute('class', 'folder-todo-add');
 
+    const menu = document.createElement('button')
+    menu.setAttribute('class', 'btn menu-btn');
+
+    const menu_btn = document.createElement('i');
+    menu_btn.setAttribute('class', 'fas fa-bars');
+
+    menu.appendChild(menu_btn)
+
     const folder_add = document.createElement('button');
     folder_add.setAttribute('class', 'btn folder_add');
 
@@ -65,6 +73,7 @@ const displayNav = () => {
 
     add.appendChild(addBtn)
 
+    folder_todo_add.appendChild(menu)
     folder_todo_add.appendChild(folder_add)
     folder_todo_add.appendChild(add)
 

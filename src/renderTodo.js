@@ -127,6 +127,7 @@ const render_Todo = (...args) => {
 
     edit_btn.addEventListener('click', e => {
         // console.log('form activated')
+        
         console.log(e.target,'edit clicked')
         const container = document.querySelector('#content')
         const form = renderForm(e.target,obj)
@@ -136,17 +137,17 @@ const render_Todo = (...args) => {
     
     // use this to delte all todos currently displayed
     delete_btn.addEventListener('click', e => {
-        let node = e.target
-        while (!node.hasAttribute('id')){
-            node = node.parentNode
+        let cur_node = e.target
+        while (!cur_node.hasAttribute('id')){
+            cur_node = cur_node.parentNode
         }
         // create obj each time delete clicked
         // how to access list of projects from here?
-        // console.log(node.id,'id')
+        // console.log(cur_node.id,'id')
         // console.log('show project')
         // console.log(Task.todoItems_project)
-        Task.remove_todo(node)
-        node.remove()
+        Task.remove_todo(cur_node)
+        cur_node.remove()
         // how to delete in a good way?
 
         // console.log('show project after delte')
@@ -156,24 +157,31 @@ const render_Todo = (...args) => {
     })
 
     // if todo is created for the first time, append new list
+    // handle when edited and render each todo of another file
     if (!obj.edit){
         // console.log('u is a rookie')
         ul.appendChild(node)
     }
 
-    // edit existing todo
+    // edit existing todo asd
     else{
-        console.log('show list after editing',Task.show_project())
-        let previous_node = args[1]
-        while (!previous_node.hasAttribute('id')){
-            previous_node = previous_node.parentNode
+        console.log(args.length)
+        if (args.length > 1){
+            console.log('show list after editing',Task.show_project())        
+            let previous_node = args[1]
+            console.log(node,'node')
+            console.log(previous_node,'previous_node')
+            while (!previous_node.hasAttribute('id')){
+                previous_node = previous_node.parentNode
+            }
+            ul.replaceChild(node,previous_node)
         }
-        ul.replaceChild(node,previous_node)
+
+        else{
+            ul.appendChild(node)
+        }
+        
     }
-
-    
-
-    
 
     // const task_div = document.createElement('li')
     

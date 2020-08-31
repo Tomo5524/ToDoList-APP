@@ -53,6 +53,14 @@ html,body{
     font-size: 22px;
 } */
 
+/* folder */
+.folder-heder{
+    font-size: 1.75rem;
+    margin: 0;
+    font-weight: 500;
+    
+}
+
 .today-date{
     position: absolute;
     top: 30px;

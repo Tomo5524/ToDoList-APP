@@ -2,6 +2,7 @@ import todo_display from "./todoDisplay.js"
 import renderForm from "./form.js"
 import displayFolder from "./folders.js"
 import displayNav from "./nav.js"
+import setLocalStorage from "./localstorage";
 // import renderdueDate from "./dueDate.js"
 // import renderPriority from "./priority.js" 
 // // import renderNotes from "./notes.js" //change bg
@@ -39,7 +40,8 @@ const add_btn = document.querySelector('.add-btn');
 // const menu_btn = document.querySelector('.menu-btn');
 // const cancel_btn = document.querySelector('cancel_box');
 
-
+// display each folder
+// setLocalStorage.renderProjectfromLocalStorage()
 
 
 //How to disable background when modal window pops up

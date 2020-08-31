@@ -1,4 +1,5 @@
 import render_Todo from "./renderTodo";
+import setLocalStorage from "./localstorage";
 
 const Task = (function() {
 
@@ -47,12 +48,20 @@ const Task = (function() {
     }
 
     let hashset = new Set()
-    let cur_project = 'Today'; // dfaults to toady for the first time
+    let first_project = JSON.parse(localStorage.key(0));
+    let cur_project = first_project;
     let default_project = {};
     default_project[cur_project] = []
     todoItems_project.push(default_project)
 
-    const get_current_projece = () => cur_project
+    const get_current_project = () => cur_project
+
+    // const change_current_project = (new_p) => cur_project doesn't work
+    const change_current_project = (new_p) => {
+        cur_project = new_p
+        // console.log(cur_project,'cur_project from task.js')
+        return cur_project
+    }
 
     const add_project = (new_project) => {
 
@@ -69,6 +78,7 @@ const Task = (function() {
             todoItems_project.push(new_obj_project)
             // can add a new project
             cur_project = new_project
+            setLocalStorage.addNewProjectToLocalStorage(new_project)
             console.log(todoItems_project,'todoItems_project')
             return true
         }
@@ -89,6 +99,7 @@ const Task = (function() {
         };
 
         // key is integer so needs index to loop through each project file
+        console.log(get_current_project(),'get curproject')
         for (let i = 0; i < todoItems_project.length; i++){
             for (let key of Object.keys(todoItems_project[i])){
                 // console.log(key,'each project')
@@ -105,8 +116,8 @@ const Task = (function() {
         // todoItems_project.push(new_obj)
         // todoItems_date.push(new_obj)
 
-        console.log(cur_project,'cur_project')
-        console.log(todoItems_project,'todoItems_project')
+        console.log(cur_project,'cur_project, task.js')
+        console.log(todoItems_project,'todoItems_project, task.js')
 
         return new_obj
     }
@@ -143,6 +154,37 @@ const Task = (function() {
         
     };
 
+    // const remove_current_todos = (project) =>{
+    //     for (let i = 0; i < todoItems_project.length; i++){
+    //         // console.log(todoItems_project[i],'cur_pro list')
+    //         // loop through each todo in current project by key(project)
+    //         for (let key of Object.keys(todoItems_project[i])) { 
+    //             // console.log(key,'cur project name')
+    //             // loop through each item in current todo 
+    //             if (key == project){
+                    
+    //                 for (let obj of todoItems_project[i][key]){
+
+    //                 }
+    //                 console.log(todoItems_project,'after project removed')
+    //                 // todoItems_project.splice(i, 1)
+    //             }
+    //             // for (let obj of todoItems_project[i][key]){ 
+    //             //     // console.log(obj,'cur_obj')
+    //             //     // console.log(todo.id,'todo.id')
+    //             //     // console.log(obj.id,'obj.id')
+    //             //     if (todo.id == obj.id){
+    //             //         todoItems_project[i][key].splice(ind, 1);
+    //             //         console.log(todoItems_project[i][key],'cur project todos after removed')
+    //             //         return 
+    //             //     }
+    //             //     ind++
+    //             // }
+    //         }
+    //     }
+
+    // }
+
     const remove_project = (project) => {
       
         for (let i = 0; i < todoItems_project.length; i++){
@@ -152,6 +194,7 @@ const Task = (function() {
                 // console.log(key,'cur project name')
                 // loop through each item in current todo 
                 if (key == project){
+                    console.log(todoItems_project,'after project removed')
                     todoItems_project.splice(i, 1)
                 }
                 // for (let obj of todoItems_project[i][key]){ 
@@ -220,7 +263,8 @@ const Task = (function() {
             todoItems_date,
             cur_project,
             getTask, 
-            get_current_projece,
+            get_current_project,
+            change_current_project,
             add_project,
             add_task, 
             remove_todo, 

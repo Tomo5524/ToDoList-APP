@@ -289,6 +289,7 @@ const renderForm = (...ele) => {
     
             // make sure user inputs todo's title
             if (title_box.value.trim()){
+                console.log(Task.get_current_project(),'before added new task, check current project, form.js')
                 const newObj = Task.add_task(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value)
                 // console.log(Task.show_project(),'after add in form clicked')
                 // let newObj = Task.getObj(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value)

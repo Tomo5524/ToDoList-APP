@@ -1,5 +1,9 @@
 import closeItem from "./close.js"
 import Task from "./task.js"
+import render_Todo from "./renderTodo.js"
+import remove_cur_todos from "./RemoveTodos.js"
+import renderEachFolder from "./renderFolder.js"
+
 
 const displayFolder = () =>{
 
@@ -43,9 +47,24 @@ const displayFolder = () =>{
     const folder_div = document.createElement('div');
     folder_div.setAttribute('class', 'folder-div py-3');
 
-    const header = document.createElement('h3');
-    header.setAttribute('class', 'folder-heder pb-3');
+    const header_div = document.createElement('div');
+    header_div.setAttribute('class', 'd-flex flex-wrap mb-3');
+
+    const header = document.createElement('button');
+    header.setAttribute('class', 'btn folder-heder');
     header.innerHTML = 'Project'
+
+    const arrow_text = document.createElement('p');
+    arrow_text.setAttribute('class', 'arrow_text folder-heder px-4');
+    arrow_text.innerHTML = '->'
+
+    const cur_project_name = document.createElement('p');
+    cur_project_name.setAttribute('class', 'cur-project-name folder-heder');
+    cur_project_name.innerHTML = Task.get_current_project();
+
+    header_div.appendChild(header)
+    header_div.appendChild(arrow_text)
+    header_div.appendChild(cur_project_name)
 
     const add_project = document.createElement('button')
     add_project.setAttribute('class', 'project-add-btn');
@@ -107,7 +126,8 @@ const displayFolder = () =>{
     // test2.setAttribute('class', 'test-text');
     // test2.innerHTML = 'test2'
 
-    folder_div.appendChild(header)
+    folder_div.appendChild(header_div)
+    // folder_div.appendChild(header)
     folder_div.appendChild(project_div_input)
     // folder_div.appendChild(today)
     folder_div.appendChild(project_div)
@@ -117,20 +137,40 @@ const displayFolder = () =>{
 
     // overlay.appendChild(container)
 
-    let allProjects = Task.show_project();
-    // render all projects when menu button is clicked
-    for (let i = 0; i < allProjects.length; i++){
-        // console.log(todoItems_project[i],'cur_pro list')
-        // loop through each todo in current project by key(project)
-        for (let key of Object.keys(allProjects[i])) { 
-            // console.log(key,'cur project name')
-            // loop through each item in current todo 
-            let projectName = renderEachFolder(key)
-            project_div.appendChild(projectName)
-        }
-    }
-    
+    // let allProjects = Task.show_project();
+    // // render all projects when menu button is clicked
+    // for (let i = 0; i < allProjects.length; i++){
+    //     // console.log(todoItems_project[i],'cur_pro list')
+    //     // loop through each todo in current project by key(project)
+    //     for (let key of Object.keys(allProjects[i])) { 
+    //         // console.log(key,'cur project name')
+    //         // loop through each item in current todo 
+    //         let projectName = renderEachFolder(key)
+    //         project_div.appendChild(projectName)
+    //     }
+    // }
 
+    // display each folder
+    // Displayfolder function only gets called one time so this whole chunk of localStorage line can be placed here
+    if (localStorage.length > 0){
+        // for (const property in localStorage){ this one loops over all the properties in localStorage
+        // loop through keys
+
+        Object.keys(localStorage).forEach(function(key){
+            console.log(key);
+            let desirialize_key = JSON.parse(key)
+            let projectName = renderEachFolder(desirialize_key)
+            project_div.appendChild(projectName)
+
+            // for (let todo of localStorage[key]){
+            //     if (todo.curProject === true){
+            //         cur_project_name.innerHTML = desirialize_key
+            //     }
+            // }
+            // console.log(localStorage.getItem(key)); get value
+         });
+    
+    }
     // totally works
     // close project
     // remove_btn.addEventListener('click', (e) => {
@@ -148,11 +188,12 @@ const displayFolder = () =>{
         // console.log('meow')
         
         if (project_div_input.classList.contains('no-display')){
-            console.log('meow')
+           
             project_div_input.classList.remove('no-display')
         }
 
         else{
+            project_input.value = '';
             closeItem(project_div_input)
         }
         
@@ -165,6 +206,7 @@ const displayFolder = () =>{
         if (project_input.value !== '' && Task.add_project(project_input.value)){
             let newProject = renderEachFolder(project_input.value)
             project_div.appendChild(newProject)
+            cur_project_name.innerHTML = project_input.value;
             project_input.value = ''
             closeItem(project_div_input)
             closeItem(overlay)
@@ -178,34 +220,21 @@ const displayFolder = () =>{
     })
 
     cancel_box.addEventListener('click', e => {
+        // reset value
+        project_input.value = ''
         closeItem(project_div_input) 
+               
+    })
+
+    header.addEventListener('click', e => {
+        //    make delete icons pop up right next to each project
+        
+        
                
     })
 
     return container
 
-    
-}
-
-function renderEachFolder(project_name) {
-    console.log(project_name,'project_name')
-    const project_title = document.createElement('button');
-    project_title.setAttribute('class', 'btn project-title d-block my-2');
-    project_title.innerHTML = project_name
-    Task.cur_project = project_name
-    console.log(Task.cur_project,'just added project')
-    // project_name.value = ''
-    project_title.addEventListener('click', e => {
-        // console.log(Task.cur_project,'Task.cur_project')
-        let previous_project = Task.cur_project
-        // console.log(project_name,'project clicked')
-        // clean up projects being displayed
-        // console.log(e.target.innerHTML)
-        Task.remove_project(previous_project)
-        Task.display_todo(project_name)
-               
-    })
-    return project_title
     
 }
 
