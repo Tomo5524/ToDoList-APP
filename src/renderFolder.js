@@ -40,31 +40,37 @@ function renderEachFolder(project_name) {
         let cur_node = e.target
         // had to use loop because either of button or i can be clicked and handle both cases
         while (!cur_node.classList.contains('project-title-div')){
-            console.log(cur_node)
+            // console.log(cur_node)
             cur_node = cur_node.parentNode
         }
         console.log(cur_node.firstChild.innerHTML, 'cur_node.firstChild')
+        
         Task.remove_project(cur_node.firstChild.innerHTML) //cur_node.firstChild.innerHTML is cur prject name
         // make selected project disappear from display
         cur_node.remove()
         setLocalStorage.removeProjectFromLocalStorage(cur_node.firstChild.innerHTML)
 
+        //////////////// project needs to be changed
+        let curProject = Task.get_current_project()
+        console.log(curProject, 'current project before project is removed Task.cur_project')
         // when there is no project, show nothing
-        if (Task.todoItems_project.length == 0){
+        if (localStorage.length == 0){
             cur_project_title.innerHTML = '';
         }
 
-        else if (cur_node.firstChild.innerHTML == Task.cur_project){
+        // project diplays only changes when cur_project removes
+        else{
+            ///////// Task.cur_project is not updated so does not work 
+            ///////// everytime you need to check cur_project, it must be returned from class function so it is updated
+            if (cur_node.firstChild.innerHTML == Task.get_current_project()){
+                console.log('/////////// cur project and removed pro are same')
+                Task.change_current_project(JSON.parse(localStorage.key(0)))
+            }
             console.log(localStorage,'localStorage')
-            let first_project = JSON.parse(localStorage.key(0));
-            cur_project_title.innerHTML = first_project;
-            ////////////////////////// project name not changed when first item is removed
-
+            cur_project_title.innerHTML = JSON.parse(localStorage.key(0)); // first project in localstorage will be current project
+            console.log(Task.get_current_project(), 'current project after project is removed') 
         }
-            
-        // }
-        // console.log(Task.show_project(),'after project removed')
-        //////////////// nothing happens after the line above executed 
+    
     });
 
     // project_name.value = ''

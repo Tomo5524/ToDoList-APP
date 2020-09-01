@@ -25,20 +25,20 @@ const Task = (function() {
     // When a todo is marked as completed, we’ll toggle the checked property to true, and when the user deletes a todo, we’ll locate the todo item in the array using its id
 
     const getTask = (given_id) => {
-
+        console.log(todoItems_project,'from gettask task.js')
         // loop through each project by index
         for (let i = 0; i < todoItems_project.length; i++){
-            console.log(todoItems_project[i],'cur_pro list')
+            console.log(todoItems_project[i],'cur_pro list from gettask task.js')
             // loop through each todo in current project by key(project)
             for (let key of Object.keys(todoItems_project[i])) { 
-                console.log(key,'cur project name')
+                console.log(key,'cur project name from gettask task.js')
                 // loop through each item in current todo 
                 for (let todo of todoItems_project[i][key]){ 
-                    console.log(todo,'cur_obj')
+                    // console.log(todo,'cur_obj')
                     if (todo.id === given_id){
-                        console.log(todoItems_project[i][key],'returned todo')
+                        console.log(todoItems_project[i][key],'returned todo from gettask task.js')
                         // todoItems_project[i][key] = all todo in key(project name)
-
+                        console.log(typeof todo)
                         return todo
                     }
                 }
@@ -54,7 +54,9 @@ const Task = (function() {
     default_project[cur_project] = []
     todoItems_project.push(default_project)
 
-    const get_current_project = () => cur_project
+    const get_current_project = () => {
+        return cur_project
+    } 
 
     // const change_current_project = (new_p) => cur_project doesn't work
     const change_current_project = (new_p) => {
@@ -66,6 +68,7 @@ const Task = (function() {
     const add_project = (new_project) => {
 
         console.log(new_project,'new_project')
+        // avoild duplicate projects
         if (hashset.has(new_project)){
             return false
         }
@@ -79,7 +82,7 @@ const Task = (function() {
             // can add a new project
             cur_project = new_project
             setLocalStorage.addNewProjectToLocalStorage(new_project)
-            console.log(todoItems_project,'todoItems_project')
+            // console.log(todoItems_project,'todoItems_project')
             return true
         }
 
@@ -99,24 +102,24 @@ const Task = (function() {
         };
 
         // key is integer so needs index to loop through each project file
-        console.log(get_current_project(),'get curproject')
+        // console.log(get_current_project(),'get curproject')
         for (let i = 0; i < todoItems_project.length; i++){
             for (let key of Object.keys(todoItems_project[i])){
                 // console.log(key,'each project')
                 
                 // two equals evaluates only value not type. 
-                if (key == cur_project){
+                if (key == get_current_project()){
                     // console.log('key exists already', cur_project,'cur_project')
                     // console.log(todoItems_project[i][cur_project],'todoItems_project[cur_project]')
-                    todoItems_project[i][cur_project].push(new_obj) 
+                    todoItems_project[i][get_current_project()].push(new_obj) 
                 };
             }
         };
+
         // todoItems_project[cur_project].push(new_obj)
         // todoItems_project.push(new_obj)
         // todoItems_date.push(new_obj)
 
-        console.log(cur_project,'cur_project, task.js')
         console.log(todoItems_project,'todoItems_project, task.js')
 
         return new_obj
@@ -154,6 +157,22 @@ const Task = (function() {
         
     };
 
+    const add_task_from_localstorage = (obj) => {
+
+        for (let i = 0; i < todoItems_project.length; i++){
+            for (let key of Object.keys(todoItems_project[i])){
+                // console.log(key,'each project')
+                
+                // two equals evaluates only value not type. 
+                if (key == get_current_project()){
+                    // console.log('key exists already', cur_project,'cur_project')
+                    // console.log(todoItems_project[i][cur_project],'todoItems_project[cur_project]')
+                    todoItems_project[i][get_current_project()].push(obj) 
+                };
+            }
+        };
+    }
+
     // const remove_current_todos = (project) =>{
     //     for (let i = 0; i < todoItems_project.length; i++){
     //         // console.log(todoItems_project[i],'cur_pro list')
@@ -186,6 +205,9 @@ const Task = (function() {
     // }
 
     const remove_project = (project) => {
+
+        // delete from hashset
+        hashset.delete(project)
       
         for (let i = 0; i < todoItems_project.length; i++){
             // console.log(todoItems_project[i],'cur_pro list')
@@ -218,7 +240,7 @@ const Task = (function() {
     }
 
     const edit_todo = (title,desc,date,start,end,priority,completed,id) => {
-        // console.log(obj)
+        console.log(id,'id') 
         const cur_todo = getTask(id)
         console.log(cur_todo,'cur_todo, called from edit_todo')
         cur_todo.title = title
@@ -268,6 +290,7 @@ const Task = (function() {
             add_project,
             add_task, 
             remove_todo, 
+            add_task_from_localstorage,
             remove_project,
             show_project,
             edit_todo,

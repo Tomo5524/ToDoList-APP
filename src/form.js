@@ -1,7 +1,7 @@
 import Task from "./task.js"
 import closeItem from "./close.js"
 import render_Todo from "./renderTodo.js"
-import render_edit_todo from "./edit.js"
+import setLocalStorage from "./localstorage";
 
 // ele determines if current element is a new todo or edit
 // ele is passed in as Rest Parameter so it can handle edit that will have 2 elements (class-attribute and object)
@@ -251,6 +251,7 @@ const renderForm = (...ele) => {
         // console.log('edit')
         // when editing, obj already exists so we have acess to obj
         let obj = ele[1]
+        console.log(obj)
         // let previous_id = obj.id
 
         // render values
@@ -294,8 +295,10 @@ const renderForm = (...ele) => {
                 // console.log(Task.show_project(),'after add in form clicked')
                 // let newObj = Task.getObj(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value)
                 // render_Todo(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
+                setLocalStorage.addNewTodoToLocalStorage(newObj)
                 render_Todo(newObj)
-                closeItem(overlay)
+                closeItem(overlay) 
+                console.log(localStorage, 'localStorage after todo added')
             }
     
             else{

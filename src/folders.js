@@ -3,6 +3,7 @@ import Task from "./task.js"
 import render_Todo from "./renderTodo.js"
 import remove_cur_todos from "./RemoveTodos.js"
 import renderEachFolder from "./renderFolder.js"
+import setLocalStorage from "./localstorage.js"
 
 
 const displayFolder = () =>{
@@ -150,17 +151,35 @@ const displayFolder = () =>{
     //     }
     // }
 
+
     // display each folder
     // Displayfolder function only gets called one time so this whole chunk of localStorage line can be placed here
-    if (localStorage.length > 0){
-        // for (const property in localStorage){ this one loops over all the properties in localStorage
-        // loop through keys
+    // setLocalStorage.renderEachProjectFromLocalStorage();
+
+    // display todo of current project
+    // console.log(Task.get_current_project(),'cur project before todos are displayed')
+    // setLocalStorage.renderTodoFromLocalStorage(Task.get_current_project())
+
+    // display each folder
+    // Displayfolder function only gets called one time so this whole chunk of localStorage line can be placed here
+    if (localStorage.length > 0){            
 
         Object.keys(localStorage).forEach(function(key){
             console.log(key);
             let desirialize_key = JSON.parse(key)
+            // display each folder
             let projectName = renderEachFolder(desirialize_key)
             project_div.appendChild(projectName)
+
+            // display todo of current project
+            setLocalStorage.renderTodoFromLocalStorage(desirialize_key)
+
+            // update todolist 
+            Task.add_project(desirialize_key)
+
+
+            // update todoitemlist as well
+            // Task.add_project(desirialize_key)
 
             // for (let todo of localStorage[key]){
             //     if (todo.curProject === true){
@@ -168,9 +187,12 @@ const displayFolder = () =>{
             //     }
             // }
             // console.log(localStorage.getItem(key)); get value
-         });
+        });
     
     }
+
+
+
     // totally works
     // close project
     // remove_btn.addEventListener('click', (e) => {
@@ -214,6 +236,7 @@ const displayFolder = () =>{
         }
 
         else{
+            console.log(Task.show_project())
             console.log('already exist or invalid value')
         }
         
