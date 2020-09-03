@@ -53,6 +53,23 @@ html,body{
     font-size: 22px;
 } */
 
+
+/* warning-box */
+.warning-box{
+    position: fixed; /* positioning in center of page */
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    
+}
+
+.warning-modal{
+    position: relative;
+    bottom: 10px;
+    left: 30vh;
+    transform: translate(-50%,-50%);
+}
+
 /* folder */
 .folder-heder{
     font-size: 1.75rem;
