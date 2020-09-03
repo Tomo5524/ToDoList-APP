@@ -61,14 +61,14 @@ const displayFolder = () =>{
 
     const cur_project_name = document.createElement('p');
     cur_project_name.setAttribute('class', 'cur-project-name folder-heder');
-    cur_project_name.innerHTML = Task.get_current_project();
+    cur_project_name.innerHTML = Task.get_current_project(); ////////////////////
 
     header_div.appendChild(header)
     header_div.appendChild(arrow_text)
     header_div.appendChild(cur_project_name)
 
-    const add_project = document.createElement('button')
-    add_project.setAttribute('class', 'project-add-btn');
+    // const add_project = document.createElement('button')
+    // add_project.setAttribute('class', 'project-add-btn');
 
     const project_div = document.createElement('div');
     project_div.setAttribute('class', 'project-div');
@@ -91,7 +91,7 @@ const displayFolder = () =>{
     const add_btn = document.createElement('button');
     add_btn.setAttribute('class', 'add-box border');
     add_btn.innerHTML = 'Add'
-    add_btn.type = 'submit'
+    // add_btn.type = 'submit'
 
     add_div.appendChild(add_btn)
 
@@ -162,20 +162,27 @@ const displayFolder = () =>{
 
     // display each folder
     // Displayfolder function only gets called one time so this whole chunk of localStorage line can be placed here
-    if (localStorage.length > 0){            
-
+    if (localStorage.length > 0){          
+        console.log(localStorage, 'very first localstorage')  
+        console.log(localStorage.length,'localStorage.length displaying folder')
         Object.keys(localStorage).forEach(function(key){
-            console.log(key);
+
+            /////// cur project is the previous one fix it
+            console.log(key,'print each project from folder.js', Task.get_current_project(), 'cur_project denotes previosu project at this point');
+
             let desirialize_key = JSON.parse(key)
             // display each folder
             let projectName = renderEachFolder(desirialize_key)
             project_div.appendChild(projectName)
 
-            // display todo of current project
-            setLocalStorage.renderTodoFromLocalStorage(desirialize_key)
-
             // update todolist 
             Task.add_project(desirialize_key)
+
+            // update hashset and add project to it
+            Task.hashset.add(desirialize_key)
+
+         
+            //////////////////////////////////// edit and create another project but todos are not store after fresh in a newly created project
 
 
             // update todoitemlist as well
@@ -188,6 +195,12 @@ const displayFolder = () =>{
             // }
             // console.log(localStorage.getItem(key)); get value
         });
+
+        // display todo of current project
+        // first item in localstorage is the default item 
+        setLocalStorage.renderTodoFromLocalStorage(JSON.parse(localStorage.key(0)))
+        Task.change_current_project(JSON.parse(localStorage.key(0)))     
+        Task.add_todo_from_localstorage()   
     
     }
 
@@ -222,6 +235,7 @@ const displayFolder = () =>{
         // overlay.display = overlay.display === 'block' ? 'none' : 'block'
     })
 
+    // when add_btn clicked, project gets added
     add_btn.addEventListener('click', (e) =>{
         // if project_input.classs?
         // console.log(project_div_input)
@@ -229,15 +243,52 @@ const displayFolder = () =>{
             let newProject = renderEachFolder(project_input.value)
             project_div.appendChild(newProject)
             cur_project_name.innerHTML = project_input.value;
-            project_input.value = ''
+
+            // update setLocalStorage by adding a newly created project
+            setLocalStorage.addNewProjectToLocalStorage(project_input.value)
+
+            // new project added so make todos currently displayed disappear
+            remove_cur_todos()
+
+            project_input.value = '';
             closeItem(project_div_input)
             closeItem(overlay)
             
         }
 
         else{
-            console.log(Task.show_project())
-            console.log('already exist or invalid value')
+
+            // warning box
+            const warning_textbox = document.createElement('div')
+            warning_textbox.setAttribute('class','warning-textbox bg-light border text-center no-display p-2')
+
+            const warning = document.createElement('p')
+            warning.setAttribute('class','warning-text')
+            warning.innerHTML = 'input field required'
+            const ok_Btn = document.createElement('button');
+            ok_Btn.innerHTML = 'OK'
+            ok_Btn.setAttribute('class','ok_btn')
+
+            warning_textbox.appendChild(warning)
+            warning_textbox.appendChild(ok_Btn)
+
+            project_div_input.appendChild(warning_textbox)
+
+            if (warning_textbox.classList.contains('no-display')){           
+                warning_textbox.classList.remove('no-display')
+            }
+
+            if (!project_input.classList.contains('border-danger')){
+                project_input.classList.add('border-danger')
+                project_input.classList.add('border')                
+            }
+
+            ok_Btn.addEventListener('click', e => {
+                closeItem(warning_textbox)
+                project_input.classList.remove('border-danger')
+                project_input.classList.remove('border')           
+            });
+            
         }
         
     })
@@ -246,13 +297,6 @@ const displayFolder = () =>{
         // reset value
         project_input.value = ''
         closeItem(project_div_input) 
-               
-    })
-
-    header.addEventListener('click', e => {
-        //    make delete icons pop up right next to each project
-        
-        
                
     })
 

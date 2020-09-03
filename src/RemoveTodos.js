@@ -1,5 +1,9 @@
 
-function remove_cur_todos(previous_project){
+function remove_cur_todos(){
+
+    console.log('remove_cur_todos executed ///////////  ')
+    // make todos disappear from display
+
     const ul = document.querySelector('.todo-list');
     // console.log(ul,'ul')
     while (ul.firstChild) {

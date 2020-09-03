@@ -16,9 +16,7 @@ const setLocalStorage = (function() {
         for (let todo of todos) {
             // let cur_todo = JSON.parse(todo)
             render_Todo(todo)
-            // add todo to todolist
-            // id will be overwritten
-            Task.add_task_from_localstorage(todo)
+            
         }
         
 
@@ -97,12 +95,12 @@ const setLocalStorage = (function() {
 
     const addNewProjectToLocalStorage = (project) => {
         let project_json = JSON.stringify(project)
-        console.log('json string before going into localstorage',project_json)
+        console.log('json project name string before going into localstorage',project_json)
         let new_array = []
         let todolist_json = JSON.stringify(new_array)
 		// push object to localStorage, key is book id, value is book object
         localStorage.setItem(project_json, todolist_json);
-        console.log(localStorage,'local storage')
+        console.log(localStorage,'local storage from addNewProjectToLocalStorage')
     }
 
     const removeProjectFromLocalStorage = (project) => {
@@ -122,18 +120,70 @@ const setLocalStorage = (function() {
         console.log(existing_todos_json,'existing_todos_json from addNewTodoToLocalStorage')
         // localStorage.removeItem(JSON.stringify(Task.get_current_project()))
 
-        // ///////////////////////////////   after page refreshes, todos are all gone
-
+        // ///////////////////////////////     after page refreshes, todos are all gone
+        console.log(Task.get_current_project(),'cur_project right before localstorage gets todo')
         localStorage.setItem(JSON.stringify(Task.get_current_project()),existing_todos_json)
     }
 
-    // const editTodoLocalStorage = (todo) => {
+    const editTodoLocalStorage = (given_todo) => {
+        if (localStorage.length > 0){            
+            console.log('cur_todo from edit localstorage executed')
+            Object.keys(localStorage).forEach(function(key){ 
+               
+                let cur_todos = JSON.parse(localStorage.getItem(key)) // grab whole todos of project 
+                console.log(cur_todos,'cur_todo from edit localstorage')
+                for (let todo of cur_todos) {
+                    // let cur_todo = JSON.parse(todo)
+                    if (todo.id == given_todo.id) {
+                        // ////////////////////////////  edit posed for now
+                        todo.title = given_todo.title
+                        todo.desc = given_todo.desc
+                        todo.date = given_todo.date
+                        todo.start = given_todo.start
+                        todo.end = given_todo.end
+                        todo.priority = given_todo.priority
+                        todo.edit = true;
 
-    // }
+                        // retrieve the old list, append to it, then save it back to localStorage
+                        localStorage.removeItem(key)
+                        localStorage.setItem(key,JSON.stringify(cur_todos))
 
-    // const removetodoFromLocalStorage = (id) =>{
+                    }
+                   
+                }
+            });
         
-    // }
+        }
+    }
+
+    const removetodoFromLocalStorage = (id) =>{
+        if (localStorage.length > 0){
+            
+            Object.keys(localStorage).forEach(function(key){ 
+               
+                let cur_todos = JSON.parse(localStorage.getItem(key)) // grab whole todos of project 
+                // console.log(cur_todos,'cur_todo from edit localstorage ln167')
+                let cnt = 0
+                for (let todo of cur_todos) {
+                    // let cur_todo = JSON.parse(todo)
+                    if (todo.id == id) {
+                        console.log('removetodoFromLocalStorage excuted')
+                        cur_todos.splice(cnt,1)
+                        // retrieve the old list, append to it, then save it back to localStorage
+                        localStorage.removeItem(key)
+                        localStorage.setItem(key,JSON.stringify(cur_todos))
+                        return
+
+                    }
+
+                    cnt++
+                   
+                }
+            });
+
+        }
+        
+    }
 
     // const renderProjectfromLocalStorage = () => {
     //     if (localStorage.length > 0){
@@ -156,7 +206,9 @@ const setLocalStorage = (function() {
             renderEachProjectFromLocalStorage,
             addNewProjectToLocalStorage,
             removeProjectFromLocalStorage,
-            addNewTodoToLocalStorage
+            addNewTodoToLocalStorage,
+            removetodoFromLocalStorage,
+            editTodoLocalStorage
             }
 	
 	

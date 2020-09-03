@@ -1,4 +1,3 @@
-
 const getTime = (time) => {
     
     const timeSplit = time.split(':');
@@ -18,6 +17,8 @@ const getTime = (time) => {
     } else {
         meridian = 'PM';
     }
+
+
     const res = hours + ':' + minutes + ' ' + meridian;
     return res
 }

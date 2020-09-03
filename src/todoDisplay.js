@@ -1,10 +1,9 @@
 import Task from "./task.js"
 import renderForm from "./form.js"
 
-
 const todo_display = () => {
 
-    const container = document.querySelector('#content')
+    // const container = document.querySelector('#content')
 
     const tasks_container = document.createElement('div');
     // container-fluid for a full width container,
@@ -25,7 +24,35 @@ const todo_display = () => {
 
     const date = document.createElement('h6');
     date.setAttribute('class', 'text-date');
-    date.innerHTML = d.toLocaleString()
+    date.innerHTML = (function () {
+        function checkTime(i) {
+            return (i < 10) ? "0" + i : i;
+        }
+    
+        function startTime() {
+            let today = new Date(),
+            h = checkTime(today.getHours()),
+            m = checkTime(today.getMinutes()),
+            s = checkTime(today.getSeconds());
+            let meridian;
+            if (h > 12) {
+                meridian = 'PM';
+                h -= 12;
+            } else if (h < 12) {
+                meridian = 'AM';
+                if (h == 0) {
+                h = 12;
+                }
+            } else {
+                meridian = 'PM';
+            }
+            date.innerHTML = h + ":" + m + ":" + s + " " + meridian;
+            let t = setTimeout(function () {
+                startTime()
+            }, 500);
+        }
+        startTime();
+    })();
 
     today_date.appendChild(day)
     today_date.appendChild(date)
@@ -68,7 +95,7 @@ const todo_display = () => {
     tasks_container.appendChild(empty_state)
 
     add_task.addEventListener('click', e => {
-        // console.log(e.target, 'add btn clicked')
+        
         const form = renderForm(e.target)
         // console.log(form)
         // console.log(e.target)

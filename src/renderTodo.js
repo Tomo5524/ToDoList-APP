@@ -2,6 +2,7 @@ import todo_display from "./todoDisplay.js"
 import Task from "./task.js"
 import getTime from "./time.js"
 import renderForm from "./form.js"
+import setLocalStorage from "./localstorage";
 
 
 const render_Todo = (...args) => {
@@ -44,8 +45,10 @@ const render_Todo = (...args) => {
 
     const start_end_div = document.createElement("div");
     start_end_div.setAttribute('class','start-end-div d-flex justify-content-center');
-
+    // console.log(obj,'obj from render folder to display time ///////////////////////////')
     if (obj.start !== '' && obj.end !== ''){
+        // console.log('render todo executed')
+        // console.log(obj, 'obj in render todo')
         const start_text = document.createElement("p");
         start_text.setAttribute('class','todo-start-time')
         // console.log(obj.start)
@@ -137,6 +140,8 @@ const render_Todo = (...args) => {
     
     // use this to delte all todos currently displayed
     delete_btn.addEventListener('click', e => {
+
+        console.log(e.target,'deleted DOM element')
         let cur_node = e.target
         while (!cur_node.hasAttribute('id')){
             cur_node = cur_node.parentNode
@@ -147,12 +152,12 @@ const render_Todo = (...args) => {
         // console.log('show project')
         // console.log(Task.todoItems_project)
         Task.remove_todo(cur_node)
+        // console.log(cur_node.id)
         cur_node.remove()
-        // how to delete in a good way?
 
-        // console.log('show project after delte')
-        // console.log(Task.todoItems_project)
-        // projects.remove_todo(node)
+        setLocalStorage.removetodoFromLocalStorage(cur_node.id)
+
+        // how to delete in a good way?
         
     })
 

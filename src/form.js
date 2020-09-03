@@ -265,7 +265,11 @@ const renderForm = (...ele) => {
             // console.log(e)   
             e.preventDefault();
             const edit_task = Task.edit_todo(title_box.value.trim(),dscr_box.value.trim(),date_box.value,start.value,end.value,priority.value,obj.completed,obj.id)
+
+            // ele[0] denotes soon-to-be-replaced element and edit_task is a new object after edited
             render_Todo(edit_task,ele[0])
+
+            setLocalStorage.editTodoLocalStorage(edit_task)
             // render_Todo(edit_task)
             closeItem(overlay)
             // Task.edit_todo()
@@ -302,11 +306,37 @@ const renderForm = (...ele) => {
             }
     
             else{
-                // handle when title is not entered
-                console.log('need title')
-            }
+                // warning box
+                // console.log('where warning at')
+                const warning_modal = document.createElement('div')
+                warning_modal.setAttribute('class','warning-modal bg-light border text-center no-display p-2')
+
+                const warning_text = document.createElement('p')
+                warning_text.setAttribute('class','warning-text')
+                warning_text.innerHTML = "You need to add a todo's title before adding a todo"
+                const ok_btn = document.createElement('button');
+                ok_btn.innerHTML = 'OK'
+                ok_btn.setAttribute('class','ok_btn')
+
+                warning_modal.appendChild(warning_text)
+                warning_modal.appendChild(ok_btn)
+                
+                modal.appendChild(warning_modal)
+                // warning_box.appendChild(ok_btn)
+
+                if (warning_modal.classList.contains('no-display')){
+                    warning_modal.classList.remove('no-display')
+                }
+
+                ok_btn.addEventListener('click', e => {
+    
+                    closeItem(warning_modal)
             
+                });
+                    
+                }
         })
+        
     }
 
     

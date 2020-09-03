@@ -25,11 +25,17 @@ const Task = (function() {
     // When a todo is marked as completed, we’ll toggle the checked property to true, and when the user deletes a todo, we’ll locate the todo item in the array using its id
 
     const getTask = (given_id) => {
+
+         // form of todolist 
+        // 0:
+        //   3: Array(1)
+        //     0: {title: "ad", desc: "", date: "", start: "", end: "", …}
+
         console.log(todoItems_project,'from gettask task.js')
         // loop through each project by index
         for (let i = 0; i < todoItems_project.length; i++){
             console.log(todoItems_project[i],'cur_pro list from gettask task.js')
-            // loop through each todo in current project by key(project)
+            // loop through each key in current project by key(project)
             for (let key of Object.keys(todoItems_project[i])) { 
                 console.log(key,'cur project name from gettask task.js')
                 // loop through each item in current todo 
@@ -48,15 +54,19 @@ const Task = (function() {
     }
 
     let hashset = new Set()
-    let first_project = JSON.parse(localStorage.key(0));
-    let cur_project = first_project;
-    let default_project = {};
-    default_project[cur_project] = []
-    todoItems_project.push(default_project)
+    let cur_project = JSON.parse(localStorage.key(0));
+    // let default_project = {};
+    // default_project[cur_project] = []
+    // todoItems_project.push(default_project)
 
     const get_current_project = () => {
         return cur_project
     } 
+
+    // const show_project = () => todoItems_project
+    function show_project(){
+        return todoItems_project
+    }
 
     // const change_current_project = (new_p) => cur_project doesn't work
     const change_current_project = (new_p) => {
@@ -65,9 +75,17 @@ const Task = (function() {
         return cur_project
     }
 
+    const change_todolist = (new_list) => {
+        todoItems_project = new_list
+        // console.log(cur_project,'cur_project from task.js')
+        return todoItems_project
+    }
+
     const add_project = (new_project) => {
 
-        console.log(new_project,'new_project')
+        // project is already in local storage that is why after refresh, nothing stored?
+
+        console.log(new_project,'new_project add_project executed')
         // avoild duplicate projects
         if (hashset.has(new_project)){
             return false
@@ -77,11 +95,18 @@ const Task = (function() {
             hashset.add(new_project)
             let new_obj_project = {}
             new_obj_project[new_project] = []
-            console.log(new_obj_project,'new_obj_project')
+            // console.log(new_obj_project,'new_obj_project')
             todoItems_project.push(new_obj_project)
             // can add a new project
-            cur_project = new_project
-            setLocalStorage.addNewProjectToLocalStorage(new_project)
+            cur_project = new_project // change current project 
+            console.log(cur_project,'cur_project after add project executed') 
+
+            /////////////////////////////////////////////////////
+            // addd new project to localstorage
+            // no need cuz its already in it
+            //////// what about after program runs and adds todo 
+            // setLocalStorage.addNewProjectToLocalStorage(new_project)
+
             // console.log(todoItems_project,'todoItems_project')
             return true
         }
@@ -98,6 +123,7 @@ const Task = (function() {
             priority,
             completed : false,
             edit : false,
+            currently_project : false,
             id : Date.now()
         };
 
@@ -129,9 +155,6 @@ const Task = (function() {
     // }
 
     const remove_todo = (todo) => {
-        // needs to change
-        // loop through each project by index
-        let index = -1;
 
         for (let i = 0; i < todoItems_project.length; i++){
             // console.log(todoItems_project[i],'cur_pro list')
@@ -157,18 +180,22 @@ const Task = (function() {
         
     };
 
-    const add_task_from_localstorage = (obj) => {
+
+    const add_todo_from_localstorage = () => {
+        console.log(show_project(),'todo list add_todo_from_localstorage just executed')
 
         for (let i = 0; i < todoItems_project.length; i++){
-            for (let key of Object.keys(todoItems_project[i])){
-                // console.log(key,'each project')
-                
-                // two equals evaluates only value not type. 
-                if (key == get_current_project()){
-                    // console.log('key exists already', cur_project,'cur_project')
-                    // console.log(todoItems_project[i][cur_project],'todoItems_project[cur_project]')
-                    todoItems_project[i][get_current_project()].push(obj) 
-                };
+            for (let cur_key of Object.keys(todoItems_project[i])){
+                    
+                let existing_todos = JSON.parse(localStorage.getItem(JSON.stringify(cur_key))); // get a whole list (todos) of current project
+                // console.log(existing_todos,'existing_todos from addNewTodoToLocalStorage')
+                // todoItems_project[i][cur_key].push(existing_todos) ////////
+                /// above line appends list to list so it was nested 
+
+                todoItems_project[i][cur_key] = existing_todos;
+
+                console.log(show_project(),'todo list right after add_todo_from_localstorage executed')
+            
             }
         };
     }
@@ -216,7 +243,7 @@ const Task = (function() {
                 // console.log(key,'cur project name')
                 // loop through each item in current todo 
                 if (key == project){
-                    console.log(todoItems_project,'after project removed')
+                    console.log(todoItems_project,'after project removed in task.js remove_project ')
                     todoItems_project.splice(i, 1)
                 }
                 // for (let obj of todoItems_project[i][key]){ 
@@ -232,11 +259,6 @@ const Task = (function() {
                 // }
             }
         }
-    }
-
-    // const show_project = () => todoItems_project
-    function show_project(){
-        return todoItems_project
     }
 
     const edit_todo = (title,desc,date,start,end,priority,completed,id) => {
@@ -255,7 +277,7 @@ const Task = (function() {
         return cur_todo
     }
 
-    const display_todo = (given_project) => {
+    const Display_todo = (given_project) => {
         // for localstorage display
         for (let i = 0; i < todoItems_project.length; i++){
             // console.log(todoItems_project[i],'cur_pro list')
@@ -264,7 +286,9 @@ const Task = (function() {
                 // console.log(key,'cur project name')
                 // loop through each item in current todo 
                 if (key == given_project){
+                    console.log(given_project,'given_project in Displaytodo')
                     for (let obj of todoItems_project[i][key]){ 
+                        console.log(todoItems_project[i][key],'obj in todoItems_project[i][key] ///////')
                         render_Todo(obj)
                     }
                 }
@@ -284,17 +308,19 @@ const Task = (function() {
     return {todoItems_project, 
             todoItems_date,
             cur_project,
+            hashset,
             getTask, 
             get_current_project,
             change_current_project,
+            change_todolist,
             add_project,
             add_task, 
             remove_todo, 
-            add_task_from_localstorage,
+            add_todo_from_localstorage,
             remove_project,
             show_project,
             edit_todo,
-            display_todo}
+            Display_todo}
 })();
 
 export default Task

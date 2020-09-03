@@ -1,8 +1,13 @@
+// TODO
+// 1. delete todos from display @done
+// 2. when there is no project, user should not be able to add Task, @ done
+
 import todo_display from "./todoDisplay.js"
 import renderForm from "./form.js"
 import displayFolder from "./folders.js"
 import displayNav from "./nav.js"
 import setLocalStorage from "./localstorage";
+import Task from "./task.js";
 // import renderdueDate from "./dueDate.js"
 // import renderPriority from "./priority.js" 
 // // import renderNotes from "./notes.js" //change bg
@@ -29,16 +34,14 @@ content.appendChild(todo)
 // console.log(nav)
 
 const folder = displayFolder()
-console.log(folder)
+// console.log(folder)
 // console.log(e.target)
 console.log('open folder')
+console.log(Task.get_current_project(), 'current project after all ')
+console.log(Task.show_project(), 'todolist after all ')
+// console.log(JSON.parse(localStorage))
 // folder.display = 'block'
 nav.appendChild(folder)
-
-
-const add_btn = document.querySelector('.add-btn');
-// const menu_btn = document.querySelector('.menu-btn');
-// const cancel_btn = document.querySelector('cancel_box');
 
 // display each folder
 // setLocalStorage.renderProjectfromLocalStorage()
@@ -46,18 +49,7 @@ const add_btn = document.querySelector('.add-btn');
 
 //How to disable background when modal window pops up
 // https://stackoverflow.com/questions/45607982/how-to-disable-background-when-modal-window-pops-up
-add_btn.addEventListener('click', e => {
-    const form = renderForm(e.target)
-// console.log(form)
-    // console.log(e.target)
-    content.appendChild(form)
 
-    // totally works
-    // const div = document.createElement('div')
-    // div.setAttribute('class', 'border');
-    // div.innerHTML = 'Meow'
-    // nav.appendChild(div)
-})
 
 // menu_btn.addEventListener('click', e => {
 

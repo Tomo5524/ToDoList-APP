@@ -1,3 +1,7 @@
+import closeItem from "./close.js"
+import Task from "./task.js"
+import renderForm from "./form.js"
+
 
 const displayNav = () => {
 
@@ -81,6 +85,65 @@ const displayNav = () => {
     nav.appendChild(folder_todo_add)
 
     title__menu_container.appendChild(nav)
+
+    const overlay = document.createElement('div');
+    overlay.setAttribute('class', 'overlay');
+    
+    const content = document.querySelector('#content')
+
+    // warning box
+    const warning_box = document.createElement('div')
+    warning_box.setAttribute('class','warning-box bg-light border text-center no-display p-2')
+
+    const warning = document.createElement('p')
+    warning.setAttribute('class','warning-text')
+    warning.innerHTML = 'You need to add a project before adding a todo'
+    const ok_btn = document.createElement('button');
+    ok_btn.innerHTML = 'OK'
+    ok_btn.setAttribute('class','ok_btn')
+
+    warning_box.appendChild(warning)
+    warning_box.appendChild(ok_btn)
+
+    folder_todo_add.appendChild(warning_box)
+    
+
+    add.addEventListener('click', e => {
+        
+        if (!Task.get_current_project() == ''){
+            console.log('hiya')
+            const form = renderForm(e.target)
+            // console.log(form)
+            // console.log(e.target)
+            content.appendChild(form)
+        }
+
+        else{
+            // pop up a message that says i need a project
+
+            if (overlay.classList.contains('no-display')){
+                overlay.classList.remove('no-display')
+                           
+            }
+
+            else{
+                overlay.appendChild(warning_box)
+                content.appendChild(overlay)
+
+                if (warning_box.classList.contains('no-display')){
+                    warning_box.classList.remove('no-display')
+                }
+                
+            }
+
+        };
+    });
+
+    ok_btn.addEventListener('click', e => {
+    
+        closeItem(overlay)
+
+    });
 
     return title__menu_container
 
