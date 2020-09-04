@@ -38,6 +38,7 @@ function renderEachFolder(project_name) {
     // trash icon clicked and remove project from todo list
     remove.addEventListener('click', e => {
         const cur_project_title = document.querySelector('.cur-project-name')
+        const cur_project_title_lg = document.querySelector('.cur-project-name-lg')
         console.log(e.target,'remove clicked')
         let cur_node = e.target
         // had to use loop because either of button or i can be clicked and handle both cases
@@ -62,6 +63,7 @@ function renderEachFolder(project_name) {
         if (localStorage.length == 0){
             remove_cur_todos()
             cur_project_title.innerHTML = '';
+            cur_project_title_lg.innerHTML = '';
             Task.change_current_project('')
 
         }
@@ -78,6 +80,7 @@ function renderEachFolder(project_name) {
                 console.log('/////////// cur project and removed pro are same')
                 Task.change_current_project(JSON.parse(localStorage.key(0)))
                 cur_project_title.innerHTML = JSON.parse(localStorage.key(0)); // first project in localstorage will be current project
+                cur_project_title_lg.innerHTML = JSON.parse(localStorage.key(0));
 
                 // display new current project's todos
                 Task.Display_todo(Task.get_current_project())
@@ -97,6 +100,7 @@ function renderEachFolder(project_name) {
         // e.target.innerHTML is same as project_name
 
         const cur_project_title = document.querySelector('.cur-project-name')
+        const cur_project_title_lg = document.querySelector('.cur-project-name-lg')
         console.log(Task.cur_project,'previous_project before changed')
         let previous_project = Task.get_current_project()
         console.log(project_name,'project clicked')
@@ -112,6 +116,7 @@ function renderEachFolder(project_name) {
         console.log(cur_project_title.innerHTML,'cur_project_title.innerHTML before displaed project gets replaced by new one')
         // when there is no project, show nothing
         cur_project_title.innerHTML = project_name
+        cur_project_title_lg.innerHTML = project_name
 
         // how to change current project, one liner did not work, you have to return the value.
         console.log(Task.get_current_project(),'Task.cur_project after changed')

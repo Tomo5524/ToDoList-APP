@@ -21,7 +21,7 @@ const render_Todo = (...args) => {
     // l.add_task(title_box.value.trim(),dscr_box.value.trim(),note_box.value.trim(),date_box.value,start.value,end.value,priority.value)
     const node = document.createElement("li");
     node.setAttribute('id', `${obj.id}`);
-    node.setAttribute('class', 'd-flex justify-content-between align-items-center py-3 border rounded');
+    node.setAttribute('class', 'd-flex justify-content-between align-items-center py-3 border round');
 
     const check_box = document.createElement("input");
     check_box.setAttribute('type', 'checkbox');
@@ -55,7 +55,7 @@ const render_Todo = (...args) => {
         start_text.innerHTML = 'Start: ' + getTime(obj.start);
 
         const end_text = document.createElement("p");
-        end_text.setAttribute('class','todo-end-time pl-5')
+        end_text.setAttribute('class','todo-end-time pad-left')
         end_text.innerHTML = 'End: ' + getTime(obj.end);
 
         start_end_div.appendChild(start_text)

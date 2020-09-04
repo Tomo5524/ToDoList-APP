@@ -7,7 +7,7 @@ const todo_display = () => {
 
     const tasks_container = document.createElement('div');
     // container-fluid for a full width container,
-    tasks_container.setAttribute('class', 'task-container d-flex align-items-center justify-content-center col-8');
+    tasks_container.setAttribute('class', 'task-container d-flex align-items-center justify-content-center col-12 col-md-8');
 
     // display current date and time 
     let d = new Date()
@@ -16,7 +16,7 @@ const todo_display = () => {
     // console.log(d.toLocaleString())
 
     const today_date = document.createElement('div');
-    today_date.setAttribute('class', 'today-date d-flex');
+    today_date.setAttribute('class', 'today-date d-none d-md-flex');
 
     const day = document.createElement('h6');
     day.setAttribute('class', 'text-day pr-2');

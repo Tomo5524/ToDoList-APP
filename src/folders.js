@@ -45,15 +45,19 @@ const displayFolder = () =>{
     // icon_div.appendChild(remove_btn)
     // icon_div.appendChild(folder_add)
 
+
+
+
     const folder_div = document.createElement('div');
     folder_div.setAttribute('class', 'folder-div py-3');
 
+    // display when width < 576px and ≥1200px
     const header_div = document.createElement('div');
-    header_div.setAttribute('class', 'd-flex flex-wrap mb-3');
+    header_div.setAttribute('class', 'd-flex d-md-none d-xl-flex flex-wrap mb-3');
 
     const header = document.createElement('button');
     header.setAttribute('class', 'btn folder-heder');
-    header.innerHTML = 'Project'
+    header.innerHTML = 'Current Project'
 
     const arrow_text = document.createElement('p');
     arrow_text.setAttribute('class', 'arrow_text folder-heder px-4');
@@ -63,15 +67,37 @@ const displayFolder = () =>{
     cur_project_name.setAttribute('class', 'cur-project-name folder-heder');
     cur_project_name.innerHTML = Task.get_current_project(); ////////////////////
 
+    // display when 576px < width < 1200px
+    const header_div_lg = document.createElement('div');
+    header_div_lg.setAttribute('class', 'd-none d-md-block d-xl-none d mb-4 text-center');
+
+    const header_lg = document.createElement('button');
+    header_lg.setAttribute('class', 'btn folder-heder');
+    header_lg.innerHTML = 'Current Project'
+
+    const arrow_text_lg = document.createElement('p');
+    arrow_text_lg.setAttribute('class', 'arrow_text folder-heder px-4');
+    arrow_text_lg.innerHTML = '↓'
+
+    const cur_project_name_lg = document.createElement('p');
+    cur_project_name_lg.setAttribute('class', 'cur-project-name-lg folder-heder');
+    cur_project_name_lg.innerHTML = Task.get_current_project();
+
     header_div.appendChild(header)
     header_div.appendChild(arrow_text)
     header_div.appendChild(cur_project_name)
-
-    // const add_project = document.createElement('button')
-    // add_project.setAttribute('class', 'project-add-btn');
+    header_div_lg.appendChild(header_lg)
+    header_div_lg.appendChild(arrow_text_lg)    
+    header_div_lg.appendChild(cur_project_name_lg)
 
     const project_div = document.createElement('div');
-    project_div.setAttribute('class', 'project-div');
+    project_div.setAttribute('class', 'project-div border py-1');
+
+    const project_div_p = document.createElement('p');
+    project_div_p.setAttribute('class', 'project-div-p');
+    project_div_p.innerHTML = 'ALL PROJECTS'
+
+    project_div.appendChild(project_div_p)
 
     const project_div_input = document.createElement('div');
     project_div_input.setAttribute('class', 'project-div-input no-display');
@@ -128,6 +154,7 @@ const displayFolder = () =>{
     // test2.innerHTML = 'test2'
 
     folder_div.appendChild(header_div)
+    folder_div.appendChild(header_div_lg)
     // folder_div.appendChild(header)
     folder_div.appendChild(project_div_input)
     // folder_div.appendChild(today)
@@ -243,6 +270,7 @@ const displayFolder = () =>{
             let newProject = renderEachFolder(project_input.value)
             project_div.appendChild(newProject)
             cur_project_name.innerHTML = project_input.value;
+            cur_project_name_lg.innerHTML = project_input.value;
 
             // update setLocalStorage by adding a newly created project
             setLocalStorage.addNewProjectToLocalStorage(project_input.value)

@@ -7,7 +7,7 @@ const displayNav = () => {
 
     const title__menu_container = document.createElement('div');
     // container-fluid for a full width container,
-    title__menu_container.setAttribute('class', 'menu-cotainer col-4 border-r');
+    title__menu_container.setAttribute('class', 'menu-cotainer col-12 col-md-4 border-r');
 
     const nav = document.createElement('div');
     nav.setAttribute('class', 'nav d-flex justify-content-between align-items-center');

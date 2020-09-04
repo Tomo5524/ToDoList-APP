@@ -1,6 +1,9 @@
 // TODO
 // 1. delete todos from display @done
 // 2. when there is no project, user should not be able to add Task, @ done
+// 3. when new project added, remove cur_todos @ done
+// 4. when current project deleted, first item in local storage becomes a new current project so display its todos @ done
+// 5. do something with date. 
 
 import todo_display from "./todoDisplay.js"
 import renderForm from "./form.js"
@@ -22,7 +25,7 @@ import Task from "./task.js";
 // menu icon lets user see existing files and creates a new one
 
 const content = document.querySelector('#content');
-content.setAttribute('class', 'h-100 fluid-container d-flex')
+content.setAttribute('class', 'h-100 fluid-container d-blcock d-md-flex')
 
 const nav = displayNav()
 
