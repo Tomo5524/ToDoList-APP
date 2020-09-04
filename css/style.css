@@ -42,6 +42,14 @@ html,body{
     text-decoration: line-through;
 }
 
+.round{
+    border-radius: 10px;
+}
+
+.pad-left{
+    padding-left: 3rem;
+}
+
 
 
 /* header */
@@ -218,7 +226,39 @@ html,body{
     
     } */
 
+    .text-title{
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .pad-left{
+        padding-left: 0.5rem;
+    }
+
+    .text-div {
+        /* flex: 1; */
+        /* margin-left: 10px;
+        margin-right: 10px; */
+        font-size: 0.7rem;
+    }
+
+    .todo-end-time{
+        padding: none!important;
+    }
+
+    .project-title {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .folder-heder {
+        font-size: 1rem;
+        margin: 0;
+        font-weight: 700;
+    }
+
     .start_div {
         padding-bottom: 20px;
     }
 }
+
