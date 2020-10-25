@@ -12,8 +12,7 @@ const todo_display = () => {
     // display current date and time 
     let d = new Date()
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-    // console.log(day)
-    // console.log(d.toLocaleString())
+    
 
     const today_date = document.createElement('div');
     today_date.setAttribute('class', 'today-date d-none d-md-flex');
