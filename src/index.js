@@ -58,8 +58,8 @@ nav.appendChild(folder)
 
 //     // calling displayFoloer makes it possible to close window
 //     const folder = displayFolder()
-//     // console.log(folder)
-//     // console.log(e.target)
+                        console.log(folder)
+    console.log(e.target)
 //     console.log('open folder')
 //     // folder.display = 'block'
 //     content.appendChild(folder)
