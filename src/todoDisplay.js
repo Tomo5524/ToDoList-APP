@@ -1,4 +1,5 @@
 import Task from "./task.js";
+import closeItem from "./close.js";
 import renderForm from "./form.js";
 
 const todo_display = () => {
@@ -66,6 +67,8 @@ const todo_display = () => {
   today_date.appendChild(date);
 
   // const today_date = display_Time()
+  const overlay = document.createElement("div");
+  overlay.setAttribute("class", "overlay");
 
   const todo_list = document.createElement("ul");
   todo_list.setAttribute("class", "todo-list col-12");
@@ -83,17 +86,6 @@ const todo_display = () => {
   const add_task_btn = document.createElement("i");
   add_task_btn.setAttribute("class", "fas fa-calendar-plus fa-3x");
 
-  add_task.appendChild(add_task_btn);
-  btn_div.appendChild(add_task);
-
-  const add_text = document.createElement("h2");
-  add_text.setAttribute("class", "add-text");
-  add_text.innerHTML = "Add your first todo";
-
-  const task_text = document.createElement("p");
-  // task_text.setAttribute('class', "add-text");
-  task_text.innerHTML = "What do you want to get done today?";
-
   const warning_box = document.createElement("div");
   warning_box.setAttribute(
     "class",
@@ -103,6 +95,7 @@ const todo_display = () => {
   const warning = document.createElement("p");
   warning.setAttribute("class", "warning-text");
   warning.innerHTML = "You need to add a project before adding a todo";
+
   const ok_btn = document.createElement("button");
   ok_btn.innerHTML = "OK";
   ok_btn.setAttribute("class", "ok_btn");
@@ -110,10 +103,21 @@ const todo_display = () => {
   warning_box.appendChild(warning);
   warning_box.appendChild(ok_btn);
 
+  add_task.appendChild(add_task_btn);
+  btn_div.appendChild(add_task);
+  btn_div.appendChild(warning_box);
+
+  const add_text = document.createElement("h2");
+  add_text.setAttribute("class", "add-text");
+  add_text.innerHTML = "Add your first todo";
+
+  const task_text = document.createElement("p");
+  // task_text.setAttribute('class', "add-text");
+  task_text.innerHTML = "What do you want to get done today?";
+
   empty_state.appendChild(btn_div);
   empty_state.appendChild(add_text);
   empty_state.appendChild(task_text);
-  empty_state.appendChild(warning_box);
 
   tasks_container.appendChild(today_date);
   tasks_container.appendChild(todo_list);
@@ -155,6 +159,10 @@ const todo_display = () => {
         }
       }
     }
+  });
+
+  ok_btn.addEventListener("click", (e) => {
+    closeItem(overlay);
   });
 
   return tasks_container;
