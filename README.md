@@ -1,6 +1,9 @@
 # Todo-List-App
 
-## [Live](https://tomo5524.github.io/ToDoList-APP/)
+
+## Live Demo
+
+[Simple To-Do List:bookmark_tabs:](https://tomo5524.github.io/ToDoList-APP/)
 
 ### This is a simple app for keeping track of your To-Dos for different projects
 
@@ -17,11 +20,6 @@
 - Vanilla JS
 - HTML5
 - CSS3
-
-## Live Demo
-
-[Simple To-Do List:bookmark_tabs:](https://tomo5524.github.io/ToDoList-APP/)
-
 
 ## Getting Started
 
